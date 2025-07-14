@@ -1,4 +1,4 @@
-﻿namespace Ranked.Services
+namespace Ranked.Services
 {
 	using Data.User.Interfaces;
 	using Data.User.Responses;
@@ -7,6 +7,7 @@
 	using Interfaces;
 
 
+	/// <inheritdoc/>
 	public class UserService : IUserService
 	{
 		private readonly IUserDA userDA;

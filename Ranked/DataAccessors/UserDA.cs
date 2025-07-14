@@ -8,11 +8,16 @@ namespace Ranked.DataAccessors
 	using Models;
 
 
+	/// <inheritdoc/>
 	public class UserDA : IUserDA
 	{
 		private readonly RankedContext context;
 
 
+		/// <summary>
+		/// Constructor for <see cref="UserDA"/>
+		/// </summary>
+		/// <param name="context">Database Context</param>
 		public UserDA(RankedContext context)
 		{
 			this.context = context;
