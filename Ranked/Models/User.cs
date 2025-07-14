@@ -8,4 +8,6 @@ public partial class User
     public uint Id { get; set; }
 
     public string Identifier { get; set; } = null!;
+
+    public virtual UserElo? UserElo { get; set; }
 }

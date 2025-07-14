@@ -16,7 +16,8 @@ internal class Program
 		builder.Services.AddEndpointsApiExplorer();
 		builder.Services.AddSwaggerGen();
 
-		builder.Services.AddUserServices();
+		builder.Services.AddUserServices()
+			.AddEloServices();
 
 		var connectionString = "server=localhost;port=1205;user=root;password=ranked;database=ranked;";
 
