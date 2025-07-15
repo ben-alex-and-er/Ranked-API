@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Ranked.Configuration;
+using Ranked.Data.Database;
 using Ranked.Models;
 
 
@@ -19,11 +20,14 @@ internal class Program
 		builder.Services.AddUserServices()
 			.AddEloServices();
 
-		var connectionString = "server=localhost;port=1205;user=root;password=ranked;database=ranked;";
+		builder.Services.AddSingleton<MySQLConnection>();
 
-		builder.Services.AddDbContext<RankedContext>(options =>
-			options.UseMySql(connectionString,
-				ServerVersion.AutoDetect(connectionString)));
+		builder.Services.AddDbContext<RankedContext>((serviceProvider, options) =>
+		{
+			var connectionString = serviceProvider.GetRequiredService<MySQLConnection>();
+
+			options.UseMySql(connectionString.ToString(), ServerVersion.AutoDetect(connectionString.ToString()));
+		});
 
 		var app = builder.Build();
 
