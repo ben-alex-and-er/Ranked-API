@@ -1,6 +1,6 @@
+using Database.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Ranked.Configuration;
-using Ranked.Data.Database;
 using Ranked.Models;
 
 

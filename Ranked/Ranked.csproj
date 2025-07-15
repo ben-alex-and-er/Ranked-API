@@ -10,8 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DataAccessors" Version="1.1.2" />
-    <PackageReference Include="IOData" Version="0.0.0" />
+    <PackageReference Include="BenAlex.DataAccessors" Version="0.0.0" />
+    <PackageReference Include="BenAlex.DbCore" Version="0.0.0" />
+    <PackageReference Include="BenAlex.IOData" Version="0.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.18">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
