@@ -14,41 +14,42 @@
 		/// <summary>
 		/// Calcultates new elos based on existing elos for a winner and a loser
 		/// </summary>
-		/// <param name="winner"></param>
-		/// <param name="loser"></param>
+		/// <param name="winner">Winner's elo</param>
+		/// <param name="loser">Loser's elo</param>
 		/// <returns></returns>
-		public static (uint, uint) Calculate1V1(uint winner, uint loser)
+		public static (uint, uint) Calculate1V1(uint winner, uint loser, uint maxEloChange = K)
 		{
-			var expectedB = 1 / (1 + Math.Pow(10, ((double)winner - loser) / 400));
-			var expectedA = 1 - expectedB;
+			var expectedLoserToLose = 1 / (1 + Math.Pow(10, ((double)winner - loser) / 400));
+			var expectedWinnerToWin = 1 - expectedLoserToLose;
 
-			var newWinner = winner + K * (1 - expectedA);
+			var newWinnerElo = Math.Round(winner + maxEloChange * (1 - expectedWinnerToWin));
 
-			if (newWinner < 0)
-				newWinner = 0;
+			if (newWinnerElo < 0)
+				newWinnerElo = 0;
 
-			var newLoser = Math.Round(loser + K * -expectedB);
+			var newLoserElo = Math.Round(loser + maxEloChange * -expectedLoserToLose);
 			
-			if (newLoser < 0)
-				newLoser = 0;
+			if (newLoserElo < 0)
+				newLoserElo = 0;
 
-			return ((uint)Math.Round(newWinner), (uint)Math.Round(newLoser));
+			return ((uint)newWinnerElo, (uint)newLoserElo);
 		}
 
 		/// <summary>
 		/// Calculates elos for winners and losers in teams
 		/// </summary>
-		/// <param name="winningTeam"></param>
-		/// <param name="losingTeam"></param>
+		/// <param name="winningTeam">A collection of user elo pairs of the winning users</param>
+		/// <param name="losingTeam">A collection of user elo pairs of the losing users</param>
 		/// <returns></returns>
 		public static (List<UserEloDTO>, List<UserEloDTO>) CalculateElos(
 			IEnumerable<UserEloDTO> winningTeam,
-			IEnumerable<UserEloDTO> losingTeam)
+			IEnumerable<UserEloDTO> losingTeam,
+			uint maxEloChange = K)
 		{
 			var averageWin = (uint)(winningTeam.Sum(x => x.Elo) / winningTeam.Count());
 			var averageLose = (uint)(losingTeam.Sum(x => x.Elo) / losingTeam.Count());
 
-			var (newWinnerAverage, newLoserAverage) = Calculate1V1(averageWin, averageLose);
+			var (newWinnerAverage, newLoserAverage) = Calculate1V1(averageWin, averageLose, maxEloChange);
 
 			var deltaWin = newWinnerAverage - averageWin;
 			var deltaLose = newLoserAverage - averageLose;
