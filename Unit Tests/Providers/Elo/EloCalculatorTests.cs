@@ -1,7 +1,7 @@
 ﻿using Ranked.Providers.Elo;
 
 
-namespace Unit_Tests.Providers
+namespace Unit_Tests.Providers.Elo
 {
 	internal class EloCalculatorTests
 	{

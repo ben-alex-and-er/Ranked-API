@@ -1,4 +1,4 @@
-﻿namespace Unit_Tests.Providers
+﻿namespace Unit_Tests.Providers.Elo
 {
 	internal static class EloCalculatorTestCaseSources
 	{
