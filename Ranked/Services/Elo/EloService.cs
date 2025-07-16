@@ -2,15 +2,15 @@
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Ranked.Services
+namespace Ranked.Services.Elo
 {
 	using Data.Elo.DTOs;
 	using Data.Elo.Interfaces;
 	using Data.Elo.Responses;
 	using Data.Elo.Status;
-	using DataAccessors.Interfaces;
+	using DataAccessors.Elo.Interfaces;
 	using Interfaces;
-	using Providers;
+	using Providers.Elo;
 
 
 	/// <inheritdoc/>

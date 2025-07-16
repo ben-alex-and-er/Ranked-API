@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Ranked.DataAccessors
+namespace Ranked.DataAccessors.User
 {
 	using Interfaces;
 	using Models;

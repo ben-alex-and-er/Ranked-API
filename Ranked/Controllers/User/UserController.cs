@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 
-namespace Ranked.Controllers
+namespace Ranked.Controllers.User
 {
 	using Data.User.Requests;
 	using Data.User.Responses;
-	using DataAccessors.Interfaces;
-	using Services.Interfaces;
+	using DataAccessors.User.Interfaces;
+	using Services.User.Interfaces;
 
 
 	/// <summary>

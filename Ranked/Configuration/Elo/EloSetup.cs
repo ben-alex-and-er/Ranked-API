@@ -1,9 +1,9 @@
-﻿namespace Ranked.Configuration
+﻿namespace Ranked.Configuration.Elo
 {
-	using DataAccessors;
-	using DataAccessors.Interfaces;
-	using Services;
-	using Services.Interfaces;
+	using DataAccessors.Elo;
+	using DataAccessors.Elo.Interfaces;
+	using Services.Elo;
+	using Services.Elo.Interfaces;
 
 
 	public static class EloSetup

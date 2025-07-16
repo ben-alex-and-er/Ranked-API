@@ -1,9 +1,9 @@
-﻿namespace Ranked.Configuration
+﻿namespace Ranked.Configuration.User
 {
-	using DataAccessors;
-	using DataAccessors.Interfaces;
-	using Services;
-	using Services.Interfaces;
+	using DataAccessors.User;
+	using DataAccessors.User.Interfaces;
+	using Services.User;
+	using Services.User.Interfaces;
 
 
 	public static class UserSetup

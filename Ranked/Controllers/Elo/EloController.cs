@@ -2,14 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace Ranked.Controllers
+namespace Ranked.Controllers.Elo
 {
 	using Data.Elo.DTOs;
 	using Data.Elo.Requests;
 	using Data.Elo.Responses;
 	using Data.Elo.Status;
-	using DataAccessors.Interfaces;
-	using Services.Interfaces;
+	using DataAccessors.Elo.Interfaces;
+	using Services.Elo.Interfaces;
 
 
 	/// <summary>

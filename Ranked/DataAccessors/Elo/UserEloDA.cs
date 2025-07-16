@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Ranked.DataAccessors
+namespace Ranked.DataAccessors.Elo
 {
 	using Data.Elo.DTOs;
 	using Interfaces;

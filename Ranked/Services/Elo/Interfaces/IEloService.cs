@@ -1,7 +1,7 @@
 ﻿using IOData.Output;
 
 
-namespace Ranked.Services.Interfaces
+namespace Ranked.Services.Elo.Interfaces
 {
 	using Data.Elo.Interfaces;
 	using Data.Elo.Responses;

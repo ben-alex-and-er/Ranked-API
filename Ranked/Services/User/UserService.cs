@@ -1,10 +1,11 @@
-﻿namespace Ranked.Services
+﻿namespace Ranked.Services.User
 {
 	using Data.Elo.DTOs;
 	using Data.User.Interfaces;
 	using Data.User.Responses;
 	using Data.User.Status;
-	using DataAccessors.Interfaces;
+	using DataAccessors.Elo.Interfaces;
+	using DataAccessors.User.Interfaces;
 	using Interfaces;
 	using Models;
 

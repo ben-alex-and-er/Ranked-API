@@ -1,7 +1,7 @@
 ﻿using DataAccessors.Interfaces;
 
 
-namespace Ranked.DataAccessors.Interfaces
+namespace Ranked.DataAccessors.Elo.Interfaces
 {
 	using Data.Elo.DTOs;
 

@@ -1,4 +1,4 @@
-﻿namespace Ranked.Providers
+﻿namespace Ranked.Providers.Elo
 {
 	using Data.Elo.DTOs;
 
