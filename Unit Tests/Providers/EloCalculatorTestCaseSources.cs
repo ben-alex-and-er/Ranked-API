@@ -1,0 +1,43 @@
+﻿namespace Unit_Tests.Providers
+{
+	internal static class EloCalculatorTestCaseSources
+	{
+		public static IEnumerable<TestCaseData> Calculate1V1TestCaseSource
+		{
+			get
+			{
+				// K = 0
+				yield return new TestCaseData((1500, 1500), 0, (1500, 1500));
+				yield return new TestCaseData((1600, 1400), 0, (1600, 1400));
+				yield return new TestCaseData((0, 0), 0, (0, 0));
+
+				// K = 16
+				yield return new TestCaseData((1500, 1500), 16, (1508, 1492));
+				yield return new TestCaseData((1400, 1600), 16, (1412, 1588));
+				yield return new TestCaseData((1000, 1000), 16, (1008, 992));
+
+				// K = 32
+				yield return new TestCaseData((1500, 1500), 32, (1516, 1484));
+				yield return new TestCaseData((1600, 1400), 32, (1608, 1392));
+				yield return new TestCaseData((1400, 1600), 32, (1424, 1576));
+				yield return new TestCaseData((2000, 1800), 32, (2008, 1792));
+				yield return new TestCaseData((1800, 2000), 32, (1824, 1976));
+				yield return new TestCaseData((1000, 1000), 32, (1016, 984));
+				yield return new TestCaseData((2500, 2400), 32, (2512, 2388));
+				yield return new TestCaseData((2400, 2500), 32, (2420, 2480));
+				yield return new TestCaseData((0, 0), 32, (16, 0));
+				yield return new TestCaseData((0, 1500), 32, (32, 1468));
+				yield return new TestCaseData((1500, 0), 32, (1500, 0));
+				yield return new TestCaseData((10, 10), 32, (26, 0));
+				yield return new TestCaseData((300, 50), 32, (306, 44));
+				yield return new TestCaseData((100, 100), 32, (116, 84));
+
+				// K = 64
+				yield return new TestCaseData((1500, 1500), 64, (1532, 1468));
+				yield return new TestCaseData((2000, 1800), 64, (2015, 1785));
+				yield return new TestCaseData((0, 1500), 64, (64, 1436));
+				yield return new TestCaseData((10, 10), 64, (42, 0));
+			}
+		}
+	}
+}
