@@ -46,8 +46,41 @@
 			IEnumerable<UserEloDTO> losingTeam,
 			uint maxEloChange = K)
 		{
-			var averageWin = (uint)(winningTeam.Sum(x => x.Elo) / winningTeam.Count());
-			var averageLose = (uint)(losingTeam.Sum(x => x.Elo) / losingTeam.Count());
+			if (!winningTeam.Any())
+				return ([], losingTeam.ToList());
+
+			if (!losingTeam.Any())
+				return (winningTeam.ToList(), []);
+
+			var averageWin = (uint)MathF.Round(winningTeam.Sum(x => x.Elo) / winningTeam.Count());
+			var averageLose = (uint)MathF.Round(losingTeam.Sum(x => x.Elo) / losingTeam.Count());
+
+			var (newWinnerAverage, newLoserAverage) = Calculate1V1(averageWin, averageLose, maxEloChange);
+
+			var deltaWin = newWinnerAverage - averageWin;
+			var deltaLose = newLoserAverage - averageLose;
+
+			var newWinning = AddDeltas(winningTeam, deltaWin);
+			var newLosing = AddDeltas(losingTeam, deltaLose);
+
+			return (newWinning, newLosing);
+		}
+
+		public static (List<UserEloDTO>, List<UserEloDTO>) CalculateWeightedElos(
+			IEnumerable<UserEloDTO> winningTeam,
+			IEnumerable<UserEloDTO> losingTeam,
+			uint maxEloChange = K)
+		{
+			if (!winningTeam.Any())
+				return ([], losingTeam.ToList());
+
+			if (!losingTeam.Any())
+				return (winningTeam.ToList(), []);
+
+			var biggestTeamCount = Math.Max(winningTeam.Count(), losingTeam.Count());
+
+			var averageWin = (uint)(winningTeam.Sum(x => x.Elo) / biggestTeamCount);
+			var averageLose = (uint)(losingTeam.Sum(x => x.Elo) / biggestTeamCount);
 
 			var (newWinnerAverage, newLoserAverage) = Calculate1V1(averageWin, averageLose, maxEloChange);
 
