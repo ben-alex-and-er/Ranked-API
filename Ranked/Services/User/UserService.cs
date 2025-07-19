@@ -7,7 +7,7 @@
 	using DataAccessors.Elo.Interfaces;
 	using DataAccessors.User.Interfaces;
 	using Interfaces;
-	using Models;
+	using Providers.Transaction.Interfaces;
 
 
 	/// <inheritdoc/>
@@ -16,7 +16,7 @@
 		private const uint INITIAL_ELO = 1500;
 
 
-		private readonly RankedContext context;
+		private readonly ITransactionProvider transactionProvider;
 
 		private readonly IUserDA userDA;
 		private readonly IUserEloDA userEloDA;
@@ -25,12 +25,12 @@
 		/// <summary>
 		/// Constructor for <see cref="UserService"/>
 		/// </summary>
-		/// <param name="context">Database Context</param>
+		/// <param name="transactionProvider">Provider for transactions</param>
 		/// <param name="userDA">Data accessor for the user database table</param>
 		/// <param name="userEloDA">Data accessor for the user_elo database table</param>
-		public UserService(RankedContext context, IUserDA userDA, IUserEloDA userEloDA)
+		public UserService(ITransactionProvider transactionProvider, IUserDA userDA, IUserEloDA userEloDA)
 		{
-			this.context = context;
+			this.transactionProvider = transactionProvider;
 			this.userDA = userDA;
 			this.userEloDA = userEloDA;
 		}
@@ -38,7 +38,7 @@
 
 		async Task<CreateUserResponse> IUserService.Create(ICreateUserRequest request)
 		{
-			using var transaction = context.Database.BeginTransaction();
+			using var transaction = await transactionProvider.CreateTransactionAsync();
 
 			var create = await userDA.Create(request.User);
 

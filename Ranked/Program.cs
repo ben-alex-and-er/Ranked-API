@@ -1,6 +1,7 @@
 using Database.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Ranked.Configuration.Elo;
+using Ranked.Configuration.Transaction;
 using Ranked.Configuration.User;
 using Ranked.Models;
 
@@ -18,8 +19,10 @@ internal class Program
 		builder.Services.AddEndpointsApiExplorer();
 		builder.Services.AddSwaggerGen();
 
-		builder.Services.AddUserServices()
-			.AddEloServices();
+		builder.Services
+			.AddEloServices()
+			.AddTransactionServices()
+			.AddUserServices();
 
 		builder.Services.AddSingleton<MySQLConnection>();
 
