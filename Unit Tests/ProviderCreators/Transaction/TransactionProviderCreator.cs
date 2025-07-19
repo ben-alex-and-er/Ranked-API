@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using NSubstitute;
-using Ranked.Providers.Transaction.Interfaces;
+using TransactionToolkit.Interfaces;
 
 
 namespace Unit_Tests.ProviderCreators.Transaction
 {
 	internal static class TransactionProviderCreator
 	{
-		public static ITransactionProvider CreateTransactionProvider()
+		public static ITransactionCreator CreateTransactionCreator()
 		{
-			var provider = Substitute.For<ITransactionProvider>();
+			var provider = Substitute.For<ITransactionCreator>();
 
 			var transaction = Substitute.For<IDbContextTransaction>();
 

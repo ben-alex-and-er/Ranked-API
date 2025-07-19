@@ -1,8 +1,10 @@
-﻿namespace Ranked.Configuration.Transaction
+﻿using TransactionToolkit;
+using TransactionToolkit.Interfaces;
+
+
+namespace Ranked.Configuration.Transaction
 {
 	using Models;
-	using Providers.Transaction;
-	using Providers.Transaction.Interfaces;
 
 
 	public static class TransactionSetup
@@ -14,7 +16,7 @@
 		/// <returns></returns>
 		public static IServiceCollection AddTransactionServices(this IServiceCollection services)
 		{
-			services.AddTransient<ITransactionProvider, TransactionProvider<RankedContext>>();
+			services.AddTransient<ITransactionCreator, TransactionCreator<RankedContext>>();
 
 			return services;
 		}

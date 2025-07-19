@@ -1,4 +1,7 @@
-﻿namespace Ranked.Services.User
+﻿using TransactionToolkit.Interfaces;
+
+
+namespace Ranked.Services.User
 {
 	using Data.Elo.DTOs;
 	using Data.User.Interfaces;
@@ -7,7 +10,6 @@
 	using DataAccessors.Elo.Interfaces;
 	using DataAccessors.User.Interfaces;
 	using Interfaces;
-	using Providers.Transaction.Interfaces;
 
 
 	/// <inheritdoc/>
@@ -16,7 +18,7 @@
 		private const uint INITIAL_ELO = 1500;
 
 
-		private readonly ITransactionProvider transactionProvider;
+		private readonly ITransactionCreator transactionCreator;
 
 		private readonly IUserDA userDA;
 		private readonly IUserEloDA userEloDA;
@@ -25,12 +27,12 @@
 		/// <summary>
 		/// Constructor for <see cref="UserService"/>
 		/// </summary>
-		/// <param name="transactionProvider">Provider for transactions</param>
+		/// <param name="transactionCreator">Transaction creator</param>
 		/// <param name="userDA">Data accessor for the user database table</param>
 		/// <param name="userEloDA">Data accessor for the user_elo database table</param>
-		public UserService(ITransactionProvider transactionProvider, IUserDA userDA, IUserEloDA userEloDA)
+		public UserService(ITransactionCreator transactionCreator, IUserDA userDA, IUserEloDA userEloDA)
 		{
-			this.transactionProvider = transactionProvider;
+			this.transactionCreator = transactionCreator;
 			this.userDA = userDA;
 			this.userEloDA = userEloDA;
 		}
@@ -38,7 +40,7 @@
 
 		async Task<CreateUserResponse> IUserService.Create(ICreateUserRequest request)
 		{
-			using var transaction = await transactionProvider.CreateTransactionAsync();
+			using var transaction = await transactionCreator.CreateTransactionAsync();
 
 			var create = await userDA.Create(request.User);
 

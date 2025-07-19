@@ -20,7 +20,7 @@ namespace Unit_Tests.Services.User
 		public void SetUp()
 		{
 			userService = new UserService(
-				TransactionProviderCreator.CreateTransactionProvider(),
+				TransactionProviderCreator.CreateTransactionCreator(),
 				UserDACreator.CreateUserDA(),
 				EloDACreator.CreateUserEloDA());
 		}
