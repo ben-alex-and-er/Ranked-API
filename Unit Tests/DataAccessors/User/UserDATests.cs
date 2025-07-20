@@ -1,4 +1,5 @@
-﻿using Ranked.DataAccessors.User;
+﻿using Microsoft.EntityFrameworkCore;
+using Ranked.DataAccessors.User;
 using Ranked.DataAccessors.User.Interfaces;
 using Ranked.Models;
 
@@ -58,9 +59,23 @@ namespace Unit_Tests.DataAccessors.User
 		[TestCaseSource(typeof(UserDATestCaseSources), nameof(UserDATestCaseSources.CreateTestCaseSource))]
 		public async Task CreateTests(string user, bool success)
 		{
+			// Act
 			var result = await userDA.Create(user);
 
-			Assert.That(result, Is.EqualTo(success));
+			// Assert
+			Assert.Multiple(async () =>
+			{
+				Assert.That(result, Is.EqualTo(success));
+
+				if (success)
+				{
+					var created = await context.Users
+						.Where(x => x.Identifier == user)
+						.AnyAsync();
+
+					Assert.That(created, Is.True);
+				}
+			});
 		}
 
 		[Test]
