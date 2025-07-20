@@ -3,6 +3,7 @@
 
 namespace Ranked.Providers.Authorization
 {
+	using Claims;
 	using Interfaces;
 
 
@@ -12,7 +13,8 @@ namespace Ranked.Providers.Authorization
 	{
 		private static readonly Dictionary<string, List<Claim>> roles = new()
 		{
-			{ "user", new List<Claim>(){ new(ClaimTypes.Role, "userRole") } }
+			{ Permissions.Roles.READER, new List<Claim>(){ new(ClaimTypes.Role, Permissions.Roles.READER) } },
+			{ Permissions.Roles.ADMIN, new List<Claim>(){ new(ClaimTypes.Role, Permissions.Roles.ADMIN) } }
 		};
 
 

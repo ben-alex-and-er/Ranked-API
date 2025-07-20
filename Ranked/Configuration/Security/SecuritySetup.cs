@@ -1,4 +1,7 @@
-﻿namespace Ranked.Configuration.Security
+﻿using Microsoft.AspNetCore.Authentication;
+
+
+namespace Ranked.Configuration.Security
 {
 	using Providers.Authorization;
 	using Providers.Authorization.Interfaces;
@@ -15,6 +18,8 @@
 		/// <returns></returns>
 		public static IServiceCollection AddSecurityServices(this IServiceCollection services)
 		{
+			services.AddScoped<IClaimsTransformation, ClaimsTransformation>();
+
 			services.AddTransient<ISecurityService, SecurityService>();
 
 			services.AddTransient<IClaimsProvider, ClaimsProvider>();
