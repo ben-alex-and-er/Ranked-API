@@ -1,11 +1,11 @@
 ﻿using NSubstitute;
 using Ranked.DataAccessors.User.Interfaces;
+using TestRig.Extensions;
 
 
 namespace Unit_Tests.DataAccessorCreators.User
 {
 	using Data;
-	using TestHelpers;
 
 
 	internal class UserDACreator

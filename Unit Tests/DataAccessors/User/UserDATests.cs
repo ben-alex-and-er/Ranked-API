@@ -2,12 +2,12 @@
 using Ranked.DataAccessors.User;
 using Ranked.DataAccessors.User.Interfaces;
 using Ranked.Models;
+using TestRig.Database;
 
 
 namespace Unit_Tests.DataAccessors.User
 {
 	using Data;
-	using TestHelpers;
 
 
 	internal class UserDATests

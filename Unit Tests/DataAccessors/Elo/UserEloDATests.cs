@@ -3,12 +3,12 @@ using Ranked.Data.Elo.DTOs;
 using Ranked.DataAccessors.Elo;
 using Ranked.DataAccessors.Elo.Interfaces;
 using Ranked.Models;
+using TestRig.Database;
 
 
 namespace Unit_Tests.DataAccessors.Elo
 {
 	using Data;
-	using TestHelpers;
 
 
 	internal class UserEloDATests

@@ -1,12 +1,12 @@
 ﻿using NSubstitute;
 using Ranked.Data.Elo.DTOs;
 using Ranked.DataAccessors.Elo.Interfaces;
+using TestRig.Extensions;
 
 
 namespace Unit_Tests.DataAccessorCreators.Elo
 {
 	using Data;
-	using TestHelpers;
 
 
 	internal static class EloDACreator
