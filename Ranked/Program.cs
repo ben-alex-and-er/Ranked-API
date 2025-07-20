@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Ranked.Configuration;
+using Ranked.Configuration.Authentication;
+using Ranked.Configuration.Authorization;
+using Ranked.Configuration.Security;
 using Ranked.Models;
 
 
@@ -16,7 +19,10 @@ internal class Program
 		builder.Services.AddEndpointsApiExplorer();
 		builder.Services.AddSwaggerGen();
 
-		builder.Services.AddUserServices();
+		builder.Services.AddUserServices()
+			.AddAuthorizationServices()
+			.AddAuthenticationServices()
+			.AddSecurityServices();
 
 		var connectionString = "server=localhost;port=1205;user=root;password=ranked;database=ranked;";
 
@@ -35,6 +41,8 @@ internal class Program
 
 		app.UseHttpsRedirection();
 
+		app.UseAuthorization();
+		app.UseAuthentication();
 		app.UseAuthorization();
 
 		app.MapControllers();
