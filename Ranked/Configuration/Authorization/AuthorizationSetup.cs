@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 
 
 namespace Ranked.Configuration.Authorization
 {
-	using Providers.Authorization.Claims;
+	using Data.Security;
 	using Providers.Authorization.Policy;
 
 
@@ -25,12 +24,15 @@ namespace Ranked.Configuration.Authorization
 
 		private static void SetupPolicies(AuthorizationOptions options)
 		{
-			options.AddPolicy(Policies.User.READ, AddClaim(Permissions.User.read));
-			options.AddPolicy(Policies.User.WRITE, AddClaim(Permissions.User.write));
-			options.AddPolicy(Policies.User.DELETE, AddClaim(Permissions.User.delete));
+			options.AddPolicies([Policies.User.read, Policies.User.write, Policies.User.delete]);
 		}
 
-		private static Action<AuthorizationPolicyBuilder> AddClaim(Claim claim)
-			=> builder => builder.RequireClaim(claim.Type, claim.Value);
+		private static void AddPolicies(this AuthorizationOptions options, IEnumerable<PolicyClaim> policyClaims)
+		{
+			foreach(var policyClaim in policyClaims)
+			{
+				options.AddPolicy(Policies.User.READ, builder => builder.RequireClaim(policyClaim.Claim.Type, policyClaim.Claim.Value));
+			}
+		}
 	}
 }
