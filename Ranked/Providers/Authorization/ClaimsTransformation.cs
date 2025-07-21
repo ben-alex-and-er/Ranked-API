@@ -13,14 +13,19 @@ namespace Ranked.Providers.Authorization
 	{
 		private readonly List<Claim> readerClaims =
 		[
-			Permissions.User.read
+			Permissions.User.read,
+			Permissions.Elo.read
 		];
 
 		private readonly List<Claim> adminClaims =
 		[
 			Permissions.User.read,
 			Permissions.User.write,
-			Permissions.User.delete
+			Permissions.User.delete,
+
+			Permissions.Elo.read,
+			Permissions.Elo.write,
+			Permissions.Elo.delete
 		];
 
 

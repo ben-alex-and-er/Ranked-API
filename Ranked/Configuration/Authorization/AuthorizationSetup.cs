@@ -25,13 +25,15 @@ namespace Ranked.Configuration.Authorization
 		private static void SetupPolicies(AuthorizationOptions options)
 		{
 			options.AddPolicies([Policies.User.read, Policies.User.write, Policies.User.delete]);
+
+			options.AddPolicies([Policies.Elo.read, Policies.Elo.write]);
 		}
 
 		private static void AddPolicies(this AuthorizationOptions options, IEnumerable<PolicyClaim> policyClaims)
 		{
 			foreach(var policyClaim in policyClaims)
 			{
-				options.AddPolicy(Policies.User.READ, builder => builder.RequireClaim(policyClaim.Claim.Type, policyClaim.Claim.Value));
+				options.AddPolicy(policyClaim.PolicyName, builder => builder.RequireClaim(policyClaim.Claim.Type, policyClaim.Claim.Value));
 			}
 		}
 	}

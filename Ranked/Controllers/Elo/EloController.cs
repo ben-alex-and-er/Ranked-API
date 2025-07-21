@@ -1,4 +1,5 @@
 ﻿using IOData.Output;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -9,6 +10,7 @@ namespace Ranked.Controllers.Elo
 	using Data.Elo.Responses;
 	using Data.Elo.Status;
 	using DataAccessors.Elo.Interfaces;
+	using Providers.Authorization.Policy;
 	using Services.Elo.Interfaces;
 
 
@@ -20,7 +22,9 @@ namespace Ranked.Controllers.Elo
 	public class EloController : ControllerBase
 	{
 		private readonly IEloService eloService;
+
 		private readonly IUserEloDA userEloDA;
+
 
 		/// <summary>
 		/// Constructor for <see cref="EloController"/>
@@ -33,12 +37,14 @@ namespace Ranked.Controllers.Elo
 			this.userEloDA = userEloDA;
 		}
 
+
 		/// <summary>
 		/// Performs an elo update for a 1v1 match between two players
 		/// </summary>
 		/// <param name="request">The request object containing match data</param>
 		/// <returns>A <see cref="Task{TResult}"/> with a <see cref="Result{TError, TSuccess}"/> containing either a <see cref="_1v1Status"/> error or a <see cref="_1v1Response"/> result</returns>
 		[HttpPost("1v1")]
+		[Authorize(Policy = Policies.Elo.WRITE)]
 		public Task<Result<_1v1Status, _1v1Response>> _1v1(_1v1Request request)
 			=> eloService._1v1(request);
 
@@ -47,8 +53,8 @@ namespace Ranked.Controllers.Elo
 		/// </summary>
 		/// <returns>An <see cref="IQueryable{T}"/> of <see cref="UserEloDTO"/> representing user elo data</returns>
 		[HttpGet]
+		[Authorize(Policy = Policies.Elo.READ)]
 		public IQueryable<UserEloDTO> GetUserElos()
 			=> userEloDA.Read();
 	}
-
 }
