@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS ranked.user_elo (
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL UNIQUE,
+    elo INT UNSIGNED NOT NULL,
+    CONSTRAINT fk_user_elo_user FOREIGN KEY (user_id) REFERENCES ranked.user(id)
+);

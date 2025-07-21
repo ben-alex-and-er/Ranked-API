@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -10,9 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BenAlex.DataAccessors" Version="0.0.0" />
+    <PackageReference Include="BenAlex.DbCore" Version="0.0.0" />
     <PackageReference Include="BenAlex.GateKeeper" Version="0.0.0" />
-    <PackageReference Include="DataAccessors" Version="1.1.2" />
-    <PackageReference Include="IOData" Version="0.0.0" />
+    <PackageReference Include="BenAlex.IOData" Version="0.0.0" />
+    <PackageReference Include="BenAlex.TransactionToolkit" Version="0.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.18">
       <PrivateAssets>all</PrivateAssets>

@@ -1,7 +1,8 @@
-﻿namespace Ranked.Services.Interfaces
+﻿namespace Ranked.Services.User.Interfaces
 {
 	using Data.User.Interfaces;
 	using Data.User.Responses;
+
 
 	/// <summary>
 	/// Service responsible for user business logic

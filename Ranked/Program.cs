@@ -1,9 +1,10 @@
-using Microsoft.EntityFrameworkCore;
-using Ranked.Configuration;
 using Ranked.Configuration.Authentication;
 using Ranked.Configuration.Authorization;
+using Ranked.Configuration.Database;
+using Ranked.Configuration.Elo;
 using Ranked.Configuration.Security;
-using Ranked.Models;
+using Ranked.Configuration.Transaction;
+using Ranked.Configuration.User;
 
 
 internal class Program
@@ -12,23 +13,21 @@ internal class Program
 	{
 		var builder = WebApplication.CreateBuilder(args);
 
-		// Add services to the container.
 
 		builder.Services.AddControllers();
-		// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 		builder.Services.AddEndpointsApiExplorer();
 		builder.Services.AddSwaggerGen();
 
-		builder.Services.AddUserServices()
+		builder.Services
 			.AddAuthorizationServices()
 			.AddAuthenticationServices()
-			.AddSecurityServices();
+			.AddDatabaseContext()
+			.AddEloServices()
+			.AddSecurityServices()
+			.AddTransactionServices()
+			.AddUserServices();
 
-		var connectionString = "server=localhost;port=1205;user=root;password=ranked;database=ranked;";
-
-		builder.Services.AddDbContext<RankedContext>(options =>
-			options.UseMySql(connectionString,
-				ServerVersion.AutoDetect(connectionString)));
 
 		var app = builder.Build();
 

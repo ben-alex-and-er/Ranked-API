@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace Ranked.Controllers
+namespace Ranked.Controllers.User
 {
 	using Data.User.Requests;
 	using Data.User.Responses;
-	using DataAccessors.Interfaces;
+	using DataAccessors.User.Interfaces;
 	using Providers.Authorization.Policy;
-	using Services.Interfaces;
+	using Services.User.Interfaces;
 
 
 	/// <summary>
