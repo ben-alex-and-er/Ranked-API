@@ -23,18 +23,18 @@ namespace Ranked.Controllers.Elo
 	{
 		private readonly IEloService eloService;
 
-		private readonly IUserEloDA userEloDA;
+		private readonly IUserApplicationEloDA userApplicationEloDA;
 
 
 		/// <summary>
 		/// Constructor for <see cref="EloController"/>
 		/// </summary>
 		/// <param name="eloService">Service responsible for elo business logic</param>
-		/// <param name="userEloDA">Data accessor for the user_elo database table</param>
-		public EloController(IEloService eloService, IUserEloDA userEloDA)
+		/// <param name="userApplicationEloDA">Data accessor for the user_application_elo database table</param>
+		public EloController(IEloService eloService, IUserApplicationEloDA userApplicationEloDA)
 		{
 			this.eloService = eloService;
-			this.userEloDA = userEloDA;
+			this.userApplicationEloDA = userApplicationEloDA;
 		}
 
 
@@ -51,10 +51,10 @@ namespace Ranked.Controllers.Elo
 		/// <summary>
 		/// Retrieves a collection of users with their associated elos
 		/// </summary>
-		/// <returns>An <see cref="IQueryable{T}"/> of <see cref="UserEloDTO"/> representing user elo data</returns>
+		/// <returns>An <see cref="IQueryable{T}"/> of <see cref="UserApplicationEloDTO"/> representing user application elo data</returns>
 		[HttpGet]
 		[Authorize(Policy = Policies.Elo.READ)]
-		public IQueryable<UserEloDTO> GetUserElos()
-			=> userEloDA.Read();
+		public IQueryable<UserApplicationEloDTO> GetUserElos()
+			=> userApplicationEloDA.Read();
 	}
 }

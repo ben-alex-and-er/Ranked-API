@@ -18,6 +18,7 @@
 			services.AddTransient<IUserService, UserService>();
 
 			services.AddTransient<IUserDA, UserDA>();
+			services.AddTransient<IUserApplicationDA, UserApplicationDA>();
 
 			return services;
 		}

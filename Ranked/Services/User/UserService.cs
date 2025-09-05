@@ -1,12 +1,14 @@
-﻿using TransactionToolkit.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using TransactionToolkit.Interfaces;
 
 
 namespace Ranked.Services.User
 {
-	using Data.Elo.DTOs;
 	using Data.User.Interfaces;
 	using Data.User.Responses;
 	using Data.User.Status;
+	using DataAccessors.Application.Interfaces;
+	using DataAccessors.Elo.Extensions;
 	using DataAccessors.Elo.Interfaces;
 	using DataAccessors.User.Interfaces;
 	using Interfaces;
@@ -15,46 +17,72 @@ namespace Ranked.Services.User
 	/// <inheritdoc/>
 	public class UserService : IUserService
 	{
-		private const uint INITIAL_ELO = 1500;
-
-
 		private readonly ITransactionCreator transactionCreator;
 
+		private readonly IApplicationDA applicationDA;
 		private readonly IUserDA userDA;
-		private readonly IUserEloDA userEloDA;
+		private readonly IUserApplicationDA userApplicationDA;
+		private readonly IUserApplicationEloDA userApplicationEloDA;
 
 
 		/// <summary>
 		/// Constructor for <see cref="UserService"/>
 		/// </summary>
 		/// <param name="transactionCreator">Transaction creator</param>
+		/// <param name="applicationDA">Data accessor for the application database table</param>
 		/// <param name="userDA">Data accessor for the user database table</param>
-		/// <param name="userEloDA">Data accessor for the user_elo database table</param>
-		public UserService(ITransactionCreator transactionCreator, IUserDA userDA, IUserEloDA userEloDA)
+		/// <param name="userApplicationDA">Data accessor for the user_application database table</param>
+		/// <param name="userApplicationEloDA">Data accessor for the user_application_elo database table</param>
+		public UserService(
+			ITransactionCreator transactionCreator,
+			IApplicationDA applicationDA,
+			IUserDA userDA,
+			IUserApplicationDA userApplicationDA,
+			IUserApplicationEloDA userApplicationEloDA)
 		{
 			this.transactionCreator = transactionCreator;
+			this.applicationDA = applicationDA;
 			this.userDA = userDA;
-			this.userEloDA = userEloDA;
+			this.userApplicationDA = userApplicationDA;
+			this.userApplicationEloDA = userApplicationEloDA;
 		}
 
 
 		async Task<CreateUserResponse> IUserService.Create(ICreateUserRequest request)
 		{
+			var applicationExists = await applicationDA.Read()
+				.AnyAsync(app => app.Guid == request.Application);
+
+			if (!applicationExists)
+				return new CreateUserResponse(CreateUserStatus.APPLICATION_NOT_FOUND);
+
+
 			using var transaction = await transactionCreator.CreateTransactionAsync();
 
-			var create = await userDA.Create(request.User);
 
-			if (!create)
-				return new CreateUserResponse(CreateUserStatus.USER_ALREADY_EXISTS);
+			var userExists = await userDA.Read()
+				.AnyAsync(user => user == request.User);
 
-			var createElo = await userEloDA.Create(new UserEloDTO
+			if (!userExists)
 			{
-				User = request.User,
-				Elo = INITIAL_ELO
-			});
+				var createUser = await userDA.Create(request.User);
+
+				if (!createUser)
+					return new CreateUserResponse(CreateUserStatus.UNEXPECTED_ERROR);
+			}
+
+
+			var createUserApplication = await userApplicationDA.Create(request);
+
+			if (!createUserApplication)
+				return new CreateUserResponse(CreateUserStatus.USER_APPLICATION_ALREADY_EXISTS);
+
+
+			var createElo = await userApplicationEloDA.Create(request);
 
 			if (!createElo)
 				return new CreateUserResponse(CreateUserStatus.FAILED_TO_CREATE_ELO);
+
 
 			transaction.Commit();
 

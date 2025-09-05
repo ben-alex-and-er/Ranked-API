@@ -38,12 +38,12 @@
 		/// <summary>
 		/// Calculates elos for winners and losers in teams
 		/// </summary>
-		/// <param name="winningTeam">A collection of user elo pairs of the winning users</param>
-		/// <param name="losingTeam">A collection of user elo pairs of the losing users</param>
+		/// <param name="winningTeam">A collection of user application elos for the winning users</param>
+		/// <param name="losingTeam">A collection of user application elo pairs for the losing users</param>
 		/// <returns></returns>
-		public static (List<UserEloDTO>, List<UserEloDTO>) CalculateElos(
-			IEnumerable<UserEloDTO> winningTeam,
-			IEnumerable<UserEloDTO> losingTeam,
+		public static (List<UserApplicationEloDTO>, List<UserApplicationEloDTO>) CalculateElos(
+			IEnumerable<UserApplicationEloDTO> winningTeam,
+			IEnumerable<UserApplicationEloDTO> losingTeam,
 			uint maxEloChange = K)
 		{
 			if (!winningTeam.Any())
@@ -66,9 +66,9 @@
 			return (newWinning, newLosing);
 		}
 
-		public static (List<UserEloDTO>, List<UserEloDTO>) CalculateWeightedElos(
-			IEnumerable<UserEloDTO> winningTeam,
-			IEnumerable<UserEloDTO> losingTeam,
+		public static (List<UserApplicationEloDTO>, List<UserApplicationEloDTO>) CalculateWeightedElos(
+			IEnumerable<UserApplicationEloDTO> winningTeam,
+			IEnumerable<UserApplicationEloDTO> losingTeam,
 			uint maxEloChange = K)
 		{
 			if (!winningTeam.Any())
@@ -94,16 +94,20 @@
 		}
 
 
-		private static List<UserEloDTO> AddDeltas(IEnumerable<UserEloDTO> userElos, uint delta)
+		private static List<UserApplicationEloDTO> AddDeltas(IEnumerable<UserApplicationEloDTO> userAppElos, uint delta)
 		{
-			var newElos = new List<UserEloDTO>();
+			var newElos = new List<UserApplicationEloDTO>();
 
-			foreach (var userElo in userElos)
+			foreach (var userAppElo in userAppElos)
 			{
-				newElos.Add(new UserEloDTO
+				newElos.Add(new UserApplicationEloDTO
 				{
-					User = userElo.User,
-					Elo = userElo.Elo + delta
+					UserApplication = new Data.User.DTOs.UserApplicationDTO
+					{
+						User = userAppElo.UserApplication.User,
+						Application = userAppElo.UserApplication.Application
+					},
+					Elo = userAppElo.Elo + delta
 				});
 			}
 

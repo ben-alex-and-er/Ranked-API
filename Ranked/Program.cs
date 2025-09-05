@@ -1,3 +1,4 @@
+using Ranked.Configuration.Application;
 using Ranked.Configuration.Authentication;
 using Ranked.Configuration.Authorization;
 using Ranked.Configuration.Database;
@@ -20,8 +21,9 @@ internal class Program
 		builder.Services.AddSwaggerGen();
 
 		builder.Services
-			.AddAuthorizationServices()
+			.AddApplicationServices()
 			.AddAuthenticationServices()
+			.AddAuthorizationServices()
 			.AddDatabaseContext()
 			.AddEloServices()
 			.AddSecurityServices()

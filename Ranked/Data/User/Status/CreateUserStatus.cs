@@ -12,14 +12,27 @@
 
 		/// <summary>
 		/// Indicates the new user failed to be created
-		/// due to the user identifier already existing
+		/// due to the application not existing
+		/// could not be found
 		/// </summary>
-		USER_ALREADY_EXISTS = 1,
+		APPLICATION_NOT_FOUND = 1,
 
 		/// <summary>
 		/// Indicates the new user failed to be created
-		/// due to the user elo failing to be created
+		/// due to the user application combination already existing
 		/// </summary>
-		FAILED_TO_CREATE_ELO = 2,
+		USER_APPLICATION_ALREADY_EXISTS = 2,
+
+		/// <summary>
+		/// Indicates the new user failed to be created
+		/// due to the user application elo failing to be created
+		/// </summary>
+		FAILED_TO_CREATE_ELO = 3,
+
+		/// <summary>
+		/// Indicates the new user failed to be created
+		/// due to an unknown reason
+		/// </summary>
+		UNEXPECTED_ERROR = 4,
 	}
 }
