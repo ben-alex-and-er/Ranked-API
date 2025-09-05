@@ -9,7 +9,7 @@
 		/// <summary>
 		/// User related Policies
 		/// </summary>
-		public class User
+		public static class User
 		{
 			/// <summary>
 			/// Policy for read

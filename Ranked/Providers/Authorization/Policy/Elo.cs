@@ -25,12 +25,12 @@
 			/// <summary>
 			/// PolicyClaim for Elo.Read permissions
 			/// </summary>
-			public static readonly PolicyClaim read = new(READ, Permissions.User.read);
+			public static readonly PolicyClaim read = new(READ, Permissions.Elo.read);
 
 			/// <summary>
 			/// PolicyClaim for Elo.Write permissions
 			/// </summary>
-			public static readonly PolicyClaim write = new(WRITE, Permissions.User.write);
+			public static readonly PolicyClaim write = new(WRITE, Permissions.Elo.write);
 		}
 	}
 }
