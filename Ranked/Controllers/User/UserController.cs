@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace Ranked.Controllers.User
@@ -6,6 +7,7 @@ namespace Ranked.Controllers.User
 	using Data.User.Requests;
 	using Data.User.Responses;
 	using DataAccessors.User.Interfaces;
+	using Providers.Authorization.Policy;
 	using Services.User.Interfaces;
 
 
@@ -38,6 +40,7 @@ namespace Ranked.Controllers.User
 		/// <param name="request">The request object containing user creation data</param>
 		/// <returns>A <see cref="Task{TResult}"/> with a <see cref="CreateUserResponse"/> result</returns>
 		[HttpPost]
+		[Authorize(Policy = Policies.User.WRITE)]
 		public Task<CreateUserResponse> CreateUser(CreateUserRequest request)
 			=> userService.Create(request);
 
@@ -46,6 +49,7 @@ namespace Ranked.Controllers.User
 		/// </summary>
 		/// <returns>An <see cref="IQueryable{T}"/> of strings representing user identifiers.</returns>
 		[HttpGet]
+		[Authorize(Policy = Policies.User.READ)]
 		public IQueryable<string> GetUsers()
 			=> userDA.Read();
 	}

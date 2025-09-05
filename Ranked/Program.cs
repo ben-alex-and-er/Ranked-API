@@ -1,5 +1,8 @@
+using Ranked.Configuration.Authentication;
+using Ranked.Configuration.Authorization;
 using Ranked.Configuration.Database;
 using Ranked.Configuration.Elo;
+using Ranked.Configuration.Security;
 using Ranked.Configuration.Transaction;
 using Ranked.Configuration.User;
 
@@ -16,10 +19,12 @@ internal class Program
 		builder.Services.AddEndpointsApiExplorer();
 		builder.Services.AddSwaggerGen();
 
-
 		builder.Services
+			.AddAuthorizationServices()
+			.AddAuthenticationServices()
 			.AddDatabaseContext()
 			.AddEloServices()
+			.AddSecurityServices()
 			.AddTransactionServices()
 			.AddUserServices();
 
@@ -35,6 +40,7 @@ internal class Program
 
 		app.UseHttpsRedirection();
 
+		app.UseAuthentication();
 		app.UseAuthorization();
 
 		app.MapControllers();
