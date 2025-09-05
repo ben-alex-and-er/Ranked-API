@@ -14,6 +14,10 @@ namespace Ranked.DataAccessors.User
 		private readonly RankedContext context;
 
 
+		private DbSet<User> Users
+			=> context.Users;
+
+
 		/// <summary>
 		/// Constructor for <see cref="UserDA"/>
 		/// </summary>
@@ -26,7 +30,7 @@ namespace Ranked.DataAccessors.User
 
 		async Task<bool> ICreate<string>.Create(string item)
 		{
-			var exists = await context.Users.AnyAsync(user => user.Identifier == item);
+			var exists = await Users.AnyAsync(user => user.Identifier == item);
 
 			if (exists)
 				return false;
@@ -36,7 +40,7 @@ namespace Ranked.DataAccessors.User
 				Identifier = item,
 			};
 
-			context.Users.Add(entry);
+			Users.Add(entry);
 
 			await context.SaveChangesAsync();
 
@@ -44,7 +48,7 @@ namespace Ranked.DataAccessors.User
 		}
 
 		IQueryable<string> IRead<string>.Read()
-			=> context.Users
+			=> Users
 				.AsNoTracking()
 				.Select(user => user.Identifier);
 	}
