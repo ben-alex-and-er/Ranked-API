@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ranked.Controllers.User
 {
+	using Data.User.DTOs;
 	using Data.User.Requests;
 	using Data.User.Responses;
 	using DataAccessors.User.Interfaces;
@@ -22,16 +23,23 @@ namespace Ranked.Controllers.User
 
 		private readonly IUserDA userDA;
 
+		private readonly IUserApplicationDA userApplicationDA;
+
 
 		/// <summary>
 		/// Constructor for <see cref="UserController"/>
 		/// </summary>
 		/// <param name="userService">Service responsible for user business logic</param>
 		/// <param name="userDA">Data accessor for the user database table</param>
-		public UserController(IUserService userService, IUserDA userDA)
+		/// <param name="userApplicationDA">Data accessor for the user_application database table</param>
+		public UserController(
+			IUserService userService,
+			IUserDA userDA,
+			IUserApplicationDA userApplicationDA)
 		{
 			this.userService = userService;
 			this.userDA = userDA;
+			this.userApplicationDA = userApplicationDA;
 		}
 
 		/// <summary>
@@ -45,12 +53,32 @@ namespace Ranked.Controllers.User
 			=> userService.Create(request);
 
 		/// <summary>
-		/// Retrieves a list of user identifiers
+		/// Retrieves a collection of user identifiers
 		/// </summary>
 		/// <returns>An <see cref="IQueryable{T}"/> of strings representing user identifiers.</returns>
-		[HttpGet]
+		[HttpGet("allusers")]
 		[Authorize(Policy = Policies.User.READ)]
-		public IQueryable<string> GetUsers()
+		public IQueryable<string> GetAllUsers()
 			=> userDA.Read();
+
+		/// <summary>
+		/// Retrieves a collection of user applications
+		/// </summary>
+		/// <returns>An <see cref="IQueryable{T}"/> of user application combinations.</returns>
+		[HttpGet("userapplications")]
+		[Authorize(Policy = Policies.User.READ)]
+		public IQueryable<UserApplicationDTO> GetUserApplications()
+			=> userApplicationDA.Read();
+
+		/// <summary>
+		/// Retrieves a collection of user applications
+		/// </summary>
+		/// <returns>An <see cref="IQueryable{T}"/> of strings representing user identifiers.</returns>
+		[HttpGet("users")]
+		[Authorize(Policy = Policies.User.READ)]
+		public IQueryable<string> GetUsers(GetUsersRequest request)
+			=> userApplicationDA.Read()
+				.Where(userApp => userApp.Application == request.Application)
+				.Select(userApp => userApp.User);
 	}
 }

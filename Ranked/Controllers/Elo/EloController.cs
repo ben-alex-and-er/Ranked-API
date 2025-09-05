@@ -49,12 +49,27 @@ namespace Ranked.Controllers.Elo
 			=> eloService._1v1(request);
 
 		/// <summary>
-		/// Retrieves a collection of users with their associated elos
+		/// Retrieves a collection of user applications with their associated elos
 		/// </summary>
 		/// <returns>An <see cref="IQueryable{T}"/> of <see cref="UserApplicationEloDTO"/> representing user application elo data</returns>
-		[HttpGet]
+		[HttpGet("userapplicationelos")]
 		[Authorize(Policy = Policies.Elo.READ)]
-		public IQueryable<UserApplicationEloDTO> GetUserElos()
+		public IQueryable<UserApplicationEloDTO> GetUserApplicationElos()
 			=> userApplicationEloDA.Read();
+
+		/// <summary>
+		/// Retrieves a collection of users with their associated elos from a given application
+		/// </summary>
+		/// <returns>An <see cref="IQueryable{T}"/> of <see cref="UserApplicationEloDTO"/> representing user application elo data</returns>
+		[HttpGet("userelos")]
+		[Authorize(Policy = Policies.Elo.READ)]
+		public IQueryable<UserEloDTO> GetUserElos(GetUserElosRequest request)
+			=> userApplicationEloDA.Read()
+				.Where(userAppElo => userAppElo.UserApplication.Application == request.Application)
+				.Select(userAppElo => new UserEloDTO
+				{
+					User = userAppElo.UserApplication.User,
+					Elo = userAppElo.Elo
+				});
 	}
 }
