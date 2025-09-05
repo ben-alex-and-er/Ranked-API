@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ranked.DataAccessors.Application
 {
+	using Data.Application.Requests.Interfaces;
 	using Data.Common.DTOs;
 	using Interfaces;
 	using Models;
@@ -28,6 +29,35 @@ namespace Ranked.DataAccessors.Application
 			this.context = context;
 		}
 
+
+		async Task<bool> ICreate<ICreateApplicationRequest>.Create(ICreateApplicationRequest item)
+		{
+			var nameExists = await Applications
+				.AsNoTracking()
+				.AnyAsync(app => app.Name == item.Name);
+
+			if (nameExists)
+				return false;
+
+			var guidExists = await Applications
+				.AsNoTracking()
+				.AnyAsync(app => app.Guid == item.Guid);
+
+			if (guidExists)
+				return false;
+
+
+			Applications.Add(new Application
+			{
+				Name = item.Name,
+				Guid = item.Guid,
+			});
+
+
+			await context.SaveChangesAsync();
+
+			return true;
+		}
 
 		IQueryable<NameGuidDTO> IRead<NameGuidDTO>.Read()
 			=> Applications
