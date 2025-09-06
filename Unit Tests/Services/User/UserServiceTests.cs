@@ -6,6 +6,7 @@ using Ranked.Services.User.Interfaces;
 
 namespace Unit_Tests.Services.User
 {
+	using DataAccessorCreators.Application;
 	using DataAccessorCreators.Elo;
 	using DataAccessorCreators.User;
 	using ProviderCreators.Transaction;
@@ -21,16 +22,18 @@ namespace Unit_Tests.Services.User
 		{
 			userService = new UserService(
 				TransactionProviderCreator.CreateTransactionCreator(),
+				ApplicationDACreator.CreateApplicationDA(),
 				UserDACreator.CreateUserDA(),
-				EloDACreator.CreateUserEloDA());
+				UserDACreator.CreateUserApplicationDA(),
+				EloDACreator.CreateUserApplicationEloDA());
 		}
 
 
 		[TestCaseSource(typeof(UserServiceTestCaseSources), nameof(UserServiceTestCaseSources.CreateTestCaseSource))]
-		public async Task CreateTests(string user, CreateUserStatus expectedResult)
+		public async Task CreateTests(string user, string application, CreateUserStatus expectedResult)
 		{
 			// Arrange
-			var request = new CreateUserRequest(user);
+			var request = new CreateUserRequest(user, new Guid(application));
 
 			// Act
 			var result = await userService.Create(request);

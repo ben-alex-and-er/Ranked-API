@@ -3,6 +3,9 @@
 
 namespace Unit_Tests.Providers.Elo
 {
+	using Data;
+
+
 	internal static class EloCalculatorTestCaseSources
 	{
 		public static IEnumerable<TestCaseData> Calculate1V1TestCaseSource
@@ -49,191 +52,191 @@ namespace Unit_Tests.Providers.Elo
 			{
 				// K = 8
 				yield return new TestCaseData(
-					new List<UserEloDTO> { new() { User = "User1", Elo = 2000 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 1800 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 2000 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1800 } },
 					8,
-					new List<UserEloDTO> { new() { User = "User1", Elo = 2002 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 1798 } });
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 2002 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1798 } });
 
 				// K = 16
 				yield return new TestCaseData(
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1300 },
-						new() { User = "User2", Elo = 1350 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1300 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1350 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 1100 },
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1100 },
 					},
 					16,
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1303 },
-						new() { User = "User2", Elo = 1353 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1303 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1353 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 1097 },
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1097 },
 					});
 
 				// K = 24
 				yield return new TestCaseData(
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 900 },
-						new() { User = "User2", Elo = 1100 },
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 900 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1100 },
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 1200 },
-						new() { User = "User4", Elo = 1200 },
-						new() { User = "User5", Elo = 1200 }
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User5", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 }
 					},
 					24,
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 918 },
-						new() { User = "User2", Elo = 1118 },
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 918 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1118 },
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 1182 },
-						new() { User = "User4", Elo = 1182 },
-						new() { User = "User5", Elo = 1182 }
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1182 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1182 },
+						new() { UserApplication = new() { User = "User5", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1182 }
 					});
 
 
 				// K = 32
 				yield return new TestCaseData(
-					new List<UserEloDTO> { },
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO> { },
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1200 },
-						new() { User = "User2", Elo = 1200 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 }
 					},
 					32,
-					new List<UserEloDTO> { },
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO> { },
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1200 },
-						new() { User = "User2", Elo = 1200 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 }
 					});
 
 				yield return new TestCaseData(
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1200 },
-						new() { User = "User2", Elo = 1200 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 }
 					},
-					new List<UserEloDTO> { },
+					new List<UserApplicationEloDTO> { },
 					32,
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1200 },
-						new() { User = "User2", Elo = 1200 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 }
 					},
-					new List<UserEloDTO> { });
+					new List<UserApplicationEloDTO> { });
 
 				yield return new TestCaseData(
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1200 },
-						new() { User = "User2", Elo = 1200 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 1200 },
-						new() { User = "User4", Elo = 1200 }
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 }
 					},
 					32,
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1216 },
-						new() { User = "User2", Elo = 1216 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1216 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1216 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 1184 },
-						new() { User = "User4", Elo = 1184 }
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1184 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1184 }
 					});
 
 				yield return new TestCaseData(
-					new List<UserEloDTO> { new() { User = "User1", Elo = 1500 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 1000 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1500 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1000 } },
 					32,
-					new List<UserEloDTO> { new() { User = "User1", Elo = 1502 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 998 } });
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1502 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 998 } });
 
 				yield return new TestCaseData(
-					new List<UserEloDTO> { new() { User = "User1", Elo = 1000 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 1500 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1000 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1500 } },
 					32,
-					new List<UserEloDTO> { new() { User = "User1", Elo = 1030 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 1470 } });
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1030 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1470 } });
 
 				yield return new TestCaseData(
-					new List<UserEloDTO> { new() { User = "User1", Elo = 0 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 0 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 0 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 0 } },
 					32,
-					new List<UserEloDTO> { new() { User = "User1", Elo = 16 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 0 } });
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 16 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 0 } });
 
 				yield return new TestCaseData(
-					new List<UserEloDTO> { new() { User = "User1", Elo = 3000 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 2500 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 3000 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 2500 } },
 					32,
-					new List<UserEloDTO> { new() { User = "User1", Elo = 3002 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 2498 } });
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 3002 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 2498 } });
 
 				// K = 48
 				yield return new TestCaseData(
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1000 },
-						new() { User = "User2", Elo = 1200 },
-						new() { User = "User3", Elo = 1400 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1000 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1400 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User4", Elo = 1300 },
-						new() { User = "User5", Elo = 1300 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1300 },
+						new() { UserApplication = new() { User = "User5", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1300 },
 					},
 					48,
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1031 },
-						new() { User = "User2", Elo = 1231 },
-						new() { User = "User3", Elo = 1431 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1031 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1231 },
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1431 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User4", Elo = 1269 },
-						new() { User = "User5", Elo = 1269 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1269 },
+						new() { UserApplication = new() { User = "User5", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1269 },
 					});
 
 				// K = 64
 				yield return new TestCaseData(
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1000 },
-						new() { User = "User2", Elo = 1000 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1000 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1000 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 1000 },
-						new() { User = "User4", Elo = 1000 }
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1000 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1000 }
 					},
 					64,
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1032 },
-						new() { User = "User2", Elo = 1032 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1032 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1032 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 968 },
-						new() { User = "User4", Elo = 968 }
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 968 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 968 }
 					});
 			}
 		}
@@ -244,191 +247,191 @@ namespace Unit_Tests.Providers.Elo
 			{
 				// K = 8
 				yield return new TestCaseData(
-					new List<UserEloDTO> { new() { User = "User1", Elo = 2000 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 1800 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 2000 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1800 } },
 					8,
-					new List<UserEloDTO> { new() { User = "User1", Elo = 2002 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 1798 } });
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 2002 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1798 } });
 
 				// K = 16
 				yield return new TestCaseData(
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1300 },
-						new() { User = "User2", Elo = 1350 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1300 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1350 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 1100 },
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1100 },
 					},
 					16,
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1300 },
-						new() { User = "User2", Elo = 1350 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1300 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1350 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 1100 },
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1100 },
 					});
 
 				// K = 24
 				yield return new TestCaseData(
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 900 },
-						new() { User = "User2", Elo = 1100 },
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 900 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1100 },
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 1200 },
-						new() { User = "User4", Elo = 1200 },
-						new() { User = "User5", Elo = 1200 }
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User5", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 }
 					},
 					24,
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 923 },
-						new() { User = "User2", Elo = 1123 },
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 923 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1123 },
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 1177 },
-						new() { User = "User4", Elo = 1177 },
-						new() { User = "User5", Elo = 1177 }
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1177 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1177 },
+						new() { UserApplication = new() { User = "User5", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1177 }
 					});
 
 
 				// K = 32
 				yield return new TestCaseData(
-					new List<UserEloDTO> { },
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO> { },
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1200 },
-						new() { User = "User2", Elo = 1200 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 }
 					},
 					32,
-					new List<UserEloDTO> { },
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO> { },
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1200 },
-						new() { User = "User2", Elo = 1200 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 }
 					});
 
 				yield return new TestCaseData(
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1200 },
-						new() { User = "User2", Elo = 1200 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 }
 					},
-					new List<UserEloDTO> { },
+					new List<UserApplicationEloDTO> { },
 					32,
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1200 },
-						new() { User = "User2", Elo = 1200 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 }
 					},
-					new List<UserEloDTO> { });
+					new List<UserApplicationEloDTO> { });
 
 				yield return new TestCaseData(
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1200 },
-						new() { User = "User2", Elo = 1200 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 1200 },
-						new() { User = "User4", Elo = 1200 }
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 }
 					},
 					32,
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1216 },
-						new() { User = "User2", Elo = 1216 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1216 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1216 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 1184 },
-						new() { User = "User4", Elo = 1184 }
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1184 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1184 }
 					});
 
 				yield return new TestCaseData(
-					new List<UserEloDTO> { new() { User = "User1", Elo = 1500 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 1000 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1500 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1000 } },
 					32,
-					new List<UserEloDTO> { new() { User = "User1", Elo = 1502 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 998 } });
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1502 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 998 } });
 
 				yield return new TestCaseData(
-					new List<UserEloDTO> { new() { User = "User1", Elo = 1000 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 1500 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1000 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1500 } },
 					32,
-					new List<UserEloDTO> { new() { User = "User1", Elo = 1030 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 1470 } });
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1030 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1470 } });
 
 				yield return new TestCaseData(
-					new List<UserEloDTO> { new() { User = "User1", Elo = 0 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 0 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 0 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 0 } },
 					32,
-					new List<UserEloDTO> { new() { User = "User1", Elo = 16 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 0 } });
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 16 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 0 } });
 
 				yield return new TestCaseData(
-					new List<UserEloDTO> { new() { User = "User1", Elo = 3000 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 2500 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 3000 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 2500 } },
 					32,
-					new List<UserEloDTO> { new() { User = "User1", Elo = 3002 } },
-					new List<UserEloDTO> { new() { User = "User2", Elo = 2498 } });
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 3002 } },
+					new List<UserApplicationEloDTO> { new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 2498 } });
 
 				// K = 48
 				yield return new TestCaseData(
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1000 },
-						new() { User = "User2", Elo = 1200 },
-						new() { User = "User3", Elo = 1400 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1000 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1200 },
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1400 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User4", Elo = 1300 },
-						new() { User = "User5", Elo = 1300 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1300 },
+						new() { UserApplication = new() { User = "User5", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1300 },
 					},
 					48,
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1006 },
-						new() { User = "User2", Elo = 1206 },
-						new() { User = "User3", Elo = 1406 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1006 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1206 },
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1406 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User4", Elo = 1294 },
-						new() { User = "User5", Elo = 1294 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1294 },
+						new() { UserApplication = new() { User = "User5", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1294 },
 					});
 
 				// K = 64
 				yield return new TestCaseData(
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1000 },
-						new() { User = "User2", Elo = 1000 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1000 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1000 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 1000 },
-						new() { User = "User4", Elo = 1000 }
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1000 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1000 }
 					},
 					64,
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User1", Elo = 1032 },
-						new() { User = "User2", Elo = 1032 }
+						new() { UserApplication = new() { User = "User1", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1032 },
+						new() { UserApplication = new() { User = "User2", Application = new Guid(AppConsts.APP_GUID) }, Elo = 1032 }
 					},
-					new List<UserEloDTO>
+					new List<UserApplicationEloDTO>
 					{
-						new() { User = "User3", Elo = 968 },
-						new() { User = "User4", Elo = 968 }
+						new() { UserApplication = new() { User = "User3", Application = new Guid(AppConsts.APP_GUID) }, Elo = 968 },
+						new() { UserApplication = new() { User = "User4", Application = new Guid(AppConsts.APP_GUID) }, Elo = 968 }
 					});
 			}
 		}
