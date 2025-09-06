@@ -24,7 +24,7 @@ namespace Unit_Tests.DataAccessorCreators.Application
 				{
 					new()
 					{
-						Name = "Global",
+						Name = AppConsts.APP_NAME,
 						Guid = new Guid(AppConsts.APP_GUID)
 					}
 				}.AsEFTestQueryable());
