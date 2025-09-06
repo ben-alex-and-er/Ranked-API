@@ -36,7 +36,7 @@ namespace Ranked.Controllers.Application
 		/// <param name="request">The request object containing application data</param>
 		/// <returns>A <see cref="Task{TResult}"/> with a <see cref="bool"/> determining whether the application was created</returns>
 		[HttpPost]
-		[Authorize(Policy = Policies.Application.WRITE)]
+		[Authorize(Policy = Policies.Application.WRITE_APPLICATION)]
 		public Task<bool> CreateApplication(CreateApplicationRequest request)
 			=> applicationDA.Create(request);
 
@@ -45,7 +45,7 @@ namespace Ranked.Controllers.Application
 		/// </summary>
 		/// <returns>An <see cref="IQueryable{T}"/> of <see cref="NameGuidDTO"/> representing application data</returns>
 		[HttpGet]
-		[Authorize(Policy = Policies.Application.READ)]
+		[Authorize(Policy = Policies.Application.READ_APPLICATION)]
 		public IQueryable<NameGuidDTO> GetApplications()
 			=> applicationDA.Read();
 	}

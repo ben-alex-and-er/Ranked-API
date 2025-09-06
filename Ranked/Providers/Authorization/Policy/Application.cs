@@ -14,23 +14,23 @@
 			/// <summary>
 			/// Policy for read
 			/// </summary>
-			public const string READ = $"{Permissions.Application.APPLICATION_CLAIM}-{Policies.READ}";
+			public const string READ_APPLICATION = $"{Permissions.Application.APPLICATION_CLAIM}-{Policies.READ}";
 
 			/// <summary>
 			/// Policy for write
 			/// </summary>
-			public const string WRITE = $"{Permissions.Application.APPLICATION_CLAIM}-{Policies.WRITE}";
+			public const string WRITE_APPLICATION = $"{Permissions.Application.APPLICATION_CLAIM}-{Policies.WRITE}";
 
 
 			/// <summary>
 			/// PolicyClaim for Application.Read permissions
 			/// </summary>
-			public static readonly PolicyClaim read = new(READ, Permissions.Application.read);
+			public static readonly PolicyClaim read = new(READ_APPLICATION, Permissions.Application.read);
 
 			/// <summary>
 			/// PolicyClaim for Application.Write permissions
 			/// </summary>
-			public static readonly PolicyClaim write = new(WRITE, Permissions.Application.write);
+			public static readonly PolicyClaim write = new(WRITE_APPLICATION, Permissions.Application.write);
 		}
 	}
 }

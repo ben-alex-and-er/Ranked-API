@@ -44,7 +44,7 @@ namespace Ranked.Controllers.Elo
 		/// <param name="request">The request object containing match data</param>
 		/// <returns>A <see cref="Task{TResult}"/> with a <see cref="Result{TError, TSuccess}"/> containing either a <see cref="_1v1Status"/> error or a <see cref="_1v1Response"/> result</returns>
 		[HttpPost("1v1")]
-		[Authorize(Policy = Policies.Elo.WRITE)]
+		[Authorize(Policy = Policies.Elo.WRITE_ELO)]
 		public Task<Result<_1v1Status, _1v1Response>> _1v1(_1v1Request request)
 			=> eloService._1v1(request);
 
@@ -53,7 +53,7 @@ namespace Ranked.Controllers.Elo
 		/// </summary>
 		/// <returns>An <see cref="IQueryable{T}"/> of <see cref="UserApplicationEloDTO"/> representing user application elo data</returns>
 		[HttpGet("userapplicationelos")]
-		[Authorize(Policy = Policies.Elo.READ)]
+		[Authorize(Policy = Policies.Elo.READ_ELO)]
 		public IQueryable<UserApplicationEloDTO> GetUserApplicationElos()
 			=> userApplicationEloDA.Read();
 
@@ -62,7 +62,7 @@ namespace Ranked.Controllers.Elo
 		/// </summary>
 		/// <returns>An <see cref="IQueryable{T}"/> of <see cref="UserApplicationEloDTO"/> representing user application elo data</returns>
 		[HttpGet("userelos")]
-		[Authorize(Policy = Policies.Elo.READ)]
+		[Authorize(Policy = Policies.Elo.READ_ELO)]
 		public IQueryable<UserEloDTO> GetUserElos(GetUserElosRequest request)
 			=> userApplicationEloDA.Read()
 				.Where(userAppElo => userAppElo.UserApplication.Application == request.Application)

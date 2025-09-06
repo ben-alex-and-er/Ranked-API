@@ -48,7 +48,7 @@ namespace Ranked.Controllers.User
 		/// <param name="request">The request object containing user creation data</param>
 		/// <returns>A <see cref="Task{TResult}"/> with a <see cref="CreateUserResponse"/> result</returns>
 		[HttpPost]
-		[Authorize(Policy = Policies.User.WRITE)]
+		[Authorize(Policy = Policies.User.WRITE_USER)]
 		public Task<CreateUserResponse> CreateUser(CreateUserRequest request)
 			=> userService.Create(request);
 
@@ -57,7 +57,7 @@ namespace Ranked.Controllers.User
 		/// </summary>
 		/// <returns>An <see cref="IQueryable{T}"/> of strings representing user identifiers.</returns>
 		[HttpGet("allusers")]
-		[Authorize(Policy = Policies.User.READ)]
+		[Authorize(Policy = Policies.User.READ_USER)]
 		public IQueryable<string> GetAllUsers()
 			=> userDA.Read();
 
@@ -66,7 +66,7 @@ namespace Ranked.Controllers.User
 		/// </summary>
 		/// <returns>An <see cref="IQueryable{T}"/> of user application combinations.</returns>
 		[HttpGet("userapplications")]
-		[Authorize(Policy = Policies.User.READ)]
+		[Authorize(Policy = Policies.User.READ_USER)]
 		public IQueryable<UserApplicationDTO> GetUserApplications()
 			=> userApplicationDA.Read();
 
@@ -75,7 +75,7 @@ namespace Ranked.Controllers.User
 		/// </summary>
 		/// <returns>An <see cref="IQueryable{T}"/> of strings representing user identifiers.</returns>
 		[HttpGet("users")]
-		[Authorize(Policy = Policies.User.READ)]
+		[Authorize(Policy = Policies.User.READ_USER)]
 		public IQueryable<string> GetUsers(GetUsersRequest request)
 			=> userApplicationDA.Read()
 				.Where(userApp => userApp.Application == request.Application)
