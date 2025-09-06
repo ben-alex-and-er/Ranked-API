@@ -52,8 +52,8 @@
 			if (!losingTeam.Any())
 				return (winningTeam.ToList(), []);
 
-			var averageWin = (uint)MathF.Round(winningTeam.Sum(x => x.Elo) / winningTeam.Count());
-			var averageLose = (uint)MathF.Round(losingTeam.Sum(x => x.Elo) / losingTeam.Count());
+			var averageWin = (uint)MathF.Round((float)winningTeam.Sum(x => x.Elo) / winningTeam.Count());
+			var averageLose = (uint)MathF.Round((float)losingTeam.Sum(x => x.Elo) / losingTeam.Count());
 
 			var (newWinnerAverage, newLoserAverage) = Calculate1V1(averageWin, averageLose, maxEloChange);
 
