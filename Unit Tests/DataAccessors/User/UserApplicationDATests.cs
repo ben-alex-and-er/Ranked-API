@@ -55,10 +55,10 @@ namespace Unit_Tests.DataAccessors.User
 			});
 
 
-			context.Applications.Add(new Application
+			context.Applications.Add(new Ranked.Models.Application
 			{
 				Id = 1,
-				Name = "Global",
+				Name = AppConsts.APP_NAME,
 				Guid = new Guid(AppConsts.APP_GUID),
 			});
 

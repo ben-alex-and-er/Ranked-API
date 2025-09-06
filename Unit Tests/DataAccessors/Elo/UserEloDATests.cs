@@ -48,10 +48,10 @@ namespace Unit_Tests.DataAccessors.Elo
 				Identifier = UserConsts.VALID_USER_4
 			});
 
-			context.Applications.Add(new Application
+			context.Applications.Add(new Ranked.Models.Application
 			{
 				Id = 1,
-				Name = "Global",
+				Name = AppConsts.APP_NAME,
 				Guid = new Guid(AppConsts.APP_GUID)
 			});
 
