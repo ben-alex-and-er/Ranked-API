@@ -8,12 +8,12 @@
 		/// <summary>
 		/// User Identifier
 		/// </summary>
-		public string User {  get; set; }
+		public required string User {  get; set; }
 
 		/// <summary>
 		/// User Elo
 		/// </summary>
-		public uint Elo { get; set; }
+		public required uint Elo { get; set; }
 
 
 		public override bool Equals(object? obj)
