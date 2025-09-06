@@ -1,4 +1,4 @@
-﻿namespace Ranked.Data.Elo.DTOs
+namespace Ranked.Data.Elo.DTOs
 {
 	using User.DTOs;
 
@@ -24,7 +24,7 @@
 			if (obj is not UserApplicationEloDTO other)
 				return false;
 
-			return other.UserApplication == UserApplication && other.Elo == Elo;
+			return other.UserApplication.Equals(UserApplication) && other.Elo == Elo;
 		}
 
 		public override int GetHashCode()
