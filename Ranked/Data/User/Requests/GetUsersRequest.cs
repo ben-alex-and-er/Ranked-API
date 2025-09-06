@@ -9,5 +9,15 @@
 		/// Application Guid
 		/// </summary>
 		public Guid Application { get; set; }
+
+
+		/// <summary>
+		/// Constructor for <see cref="GetUsersRequest"/>
+		/// </summary>
+		/// <param name="application">Application Guid</param>
+		public GetUsersRequest(Guid application)
+		{
+			Application = application;
+		}
 	}
 }

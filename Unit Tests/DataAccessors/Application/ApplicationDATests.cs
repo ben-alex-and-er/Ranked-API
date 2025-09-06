@@ -49,11 +49,7 @@ namespace Unit_Tests.DataAccessors.Application
 		public async Task CreateTests(string name, string guid, bool success)
 		{
 			// Arrange
-			var request = new CreateApplicationRequest
-			{
-				Name = name,
-				Guid = new Guid(guid)
-			};
+			var request = new CreateApplicationRequest(name, new Guid(guid));
 
 			// Act
 			var result = await applicationDA.Create(request);

@@ -11,12 +11,12 @@
 		/// <summary>
 		/// User Identifier
 		/// </summary>
-		public string User { get; set; }
+		public required string User { get; set; }
 
 		/// <summary>
 		/// User's application
 		/// </summary>
-		public Guid Application { get; set; }
+		public required Guid Application { get; set; }
 
 
 		public override bool Equals(object? obj)

@@ -11,12 +11,12 @@ namespace Ranked.Data.Elo.DTOs
 		/// <summary>
 		/// User Application combination
 		/// </summary>
-		public UserApplicationDTO UserApplication { get; set; }
+		public required UserApplicationDTO UserApplication { get; set; }
 
 		/// <summary>
 		/// Elo rating
 		/// </summary>
-		public uint Elo { get; set; }
+		public required uint Elo { get; set; }
 
 
 		public override bool Equals(object? obj)

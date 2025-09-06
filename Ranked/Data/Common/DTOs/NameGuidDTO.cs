@@ -8,12 +8,12 @@
 		/// <summary>
 		/// Name of the item
 		/// </summary>
-		public string Name { get; set; }
+		public required string Name { get; set; }
 
 		/// <summary>
 		/// Guid of the item
 		/// </summary>
-		public Guid Guid { get; set; }
+		public required Guid Guid { get; set; }
 
 
 		public override bool Equals(object? obj)

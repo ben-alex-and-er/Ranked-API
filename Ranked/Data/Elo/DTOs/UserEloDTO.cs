@@ -8,11 +8,11 @@
 		/// <summary>
 		/// User identifier
 		/// </summary>
-		public string User { get; set; }
+		public required string User { get; set; }
 
 		/// <summary>
 		/// Elo rating
 		/// </summary>
-		public uint Elo { get; set; }
+		public required uint Elo { get; set; }
 	}
 }

@@ -8,6 +8,16 @@
 		/// <summary>
 		/// Application Guid
 		/// </summary>
-		public Guid Application { get; set; }
+		public Guid Application { get; }
+
+
+		/// <summary>
+		/// Constructor for <see cref="GetUserElosRequest"/>
+		/// </summary>
+		/// <param name="application">Application Guid</param>
+		public GetUserElosRequest(Guid application)
+		{
+			Application = application;
+		}
 	}
 }
