@@ -42,6 +42,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"ben-alex-and-er_CommonCode" /o:"ben-alex-and-er" /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
-          dotnet build
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"ben-alex-and-er_Ranked-API" /o:"ben-alex-and-er" /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          dotnet build Ranked/Ranked.sln
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
