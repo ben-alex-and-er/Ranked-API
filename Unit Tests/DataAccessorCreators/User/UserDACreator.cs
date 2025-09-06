@@ -1,5 +1,6 @@
 ﻿using NSubstitute;
 using Ranked.Data.User.DTOs;
+using Ranked.Data.User.Interfaces;
 using Ranked.DataAccessors.User.Interfaces;
 using TestRig.Extensions;
 
@@ -7,8 +8,7 @@ using TestRig.Extensions;
 namespace Unit_Tests.DataAccessorCreators.User
 {
 	using Data;
-	using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-	using Ranked.Data.User.Interfaces;
+
 
 	internal class UserDACreator
 	{
