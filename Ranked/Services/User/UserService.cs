@@ -68,7 +68,7 @@ namespace Ranked.Services.User
 				var createUser = await userDA.Create(request.User);
 
 				if (!createUser)
-					return new CreateUserResponse(CreateUserStatus.UNEXPECTED_ERROR);
+					throw new InvalidOperationException("Failed to create user. This should not happen since user does not exist.");
 			}
 
 

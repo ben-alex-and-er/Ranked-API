@@ -27,12 +27,6 @@
 		/// Indicates the new user failed to be created
 		/// due to the user application elo failing to be created
 		/// </summary>
-		FAILED_TO_CREATE_ELO = 3,
-
-		/// <summary>
-		/// Indicates the new user failed to be created
-		/// due to an unknown reason
-		/// </summary>
-		UNEXPECTED_ERROR = 4,
+		FAILED_TO_CREATE_ELO = 3
 	}
 }
