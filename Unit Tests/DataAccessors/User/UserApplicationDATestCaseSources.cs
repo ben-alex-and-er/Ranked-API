@@ -10,8 +10,9 @@
 			get
 			{
 				yield return new TestCaseData(UserConsts.NEW_USER_1, AppConsts.APP_GUID, true);
-				yield return new TestCaseData(UserConsts.VALID_USER_1, AppConsts.APP_GUID, false);
+				yield return new TestCaseData(UserConsts.INVALID_USER_1, AppConsts.APP_GUID, false);
 				yield return new TestCaseData(UserConsts.NEW_USER_1, Guid.Empty.ToString(), false);
+				yield return new TestCaseData(UserConsts.VALID_USER_1, AppConsts.APP_GUID, false);
 			}
 		}
 	}
