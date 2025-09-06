@@ -4,6 +4,7 @@ using Ranked.Data.User.Status;
 using Ranked.DataAccessors.User.Interfaces;
 using Ranked.Services.User;
 using Ranked.Services.User.Interfaces;
+using TestRig.Extensions;
 
 
 namespace Unit_Tests.Services.User
@@ -51,8 +52,14 @@ namespace Unit_Tests.Services.User
 			// Arrange
 			var userDA = Substitute.For<IUserDA>();
 
-			userDA.Create(Arg.Any<string>())
+			userDA.Create(UserConsts.NEW_USER_1)
 				.Returns(false);
+
+			userDA.Read()
+				.Returns(new List<string>
+				{
+
+				}.AsEFTestQueryable());
 
 			userService = new UserService(
 				TransactionProviderCreator.CreateTransactionCreator(),
