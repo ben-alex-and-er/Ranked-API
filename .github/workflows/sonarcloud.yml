@@ -54,7 +54,7 @@ jobs:
             /o:"ben-alex-and-er" `
             /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
             /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml `
-            /d:sonar.coverage.exclusions="Ranked/Configuration/**, Ranked/Controllers/**, Ranked/Providers/Authorization/Claims, Ranked/Providers/Authorization/Polioy" `
+            /d:sonar.coverage.exclusions="Ranked/Configuration/**, Ranked/Controllers/**, Ranked/Providers/Authorization/Claims/**, Ranked/Providers/Authorization/Policy/**" `
             /d:sonar.exclusions="Ranked/Models/**"
           dotnet build Ranked/Ranked.sln --no-incremental
           dotnet-coverage collect "dotnet test Ranked/Ranked.sln" -f xml -o "coverage.xml"
