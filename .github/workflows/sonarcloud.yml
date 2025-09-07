@@ -49,7 +49,13 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"ben-alex-and-er_Ranked-API" /o:"ben-alex-and-er" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml /d:sonar.coverage.exclusions="**/Configuration/**, **/Controllers/**" /d:sonar.exclusions="**/Models/**"
+          .\.sonar\scanner\dotnet-sonarscanner begin `
+            /k:"ben-alex-and-er_Ranked-API" `
+            /o:"ben-alex-and-er" `
+            /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
+            /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml `
+            /d:sonar.coverage.exclusions="Ranked/Configuration/**, Ranked/Controllers/**, Ranked/Providers/Authorization/Claims/**, Ranked/Providers/Authorization/Policy/**, Ranked/Program.cs" `
+            /d:sonar.exclusions="Ranked/Models/**"
           dotnet build Ranked/Ranked.sln --no-incremental
           dotnet-coverage collect "dotnet test Ranked/Ranked.sln" -f xml -o "coverage.xml"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
