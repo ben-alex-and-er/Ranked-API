@@ -34,10 +34,13 @@ namespace Unit_Tests.Services.Security
 		[TestCaseSource(typeof(SecurityServiceTestCaseSources), nameof(SecurityServiceTestCaseSources.GetPolicyTokenTestCaseSource))]
 		public async Task GetPolicyTokenTests(string subject, string password, Type expectedType, int expectedStatusCode)
 		{
+			// Arrange
 			var request = new PolicyRequest(subject, password);
 
+			// Act
 			var result = await securityService.GetPolicyToken(request);
 
+			// Assert
 			Assert.Multiple(() =>
 			{
 				Assert.That(result, Is.TypeOf(expectedType));
