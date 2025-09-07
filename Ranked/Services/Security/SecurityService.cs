@@ -17,7 +17,7 @@ namespace Ranked.Services.Security
 	/// <inheritdoc/>
 	public class SecurityService : ISecurityService
 	{
-		private readonly IJWTDescriptor jwtDescriptor;
+		private readonly IJwtDescriptor jwtDescriptor;
 
 		private readonly IClaimsProvider claimsProvider;
 
@@ -30,7 +30,7 @@ namespace Ranked.Services.Security
 		/// <param name="jwtDescriptor">JWT Descriptor</param>
 		/// <param name="claimsProvider">Claims Provider</param>
 		/// <param name="roleProvider">Role Provider</param>
-		public SecurityService(IJWTDescriptor jwtDescriptor, IClaimsProvider claimsProvider, IRoleProvider roleProvider)
+		public SecurityService(IJwtDescriptor jwtDescriptor, IClaimsProvider claimsProvider, IRoleProvider roleProvider)
 		{
 			this.jwtDescriptor = jwtDescriptor;
 			this.claimsProvider = claimsProvider;

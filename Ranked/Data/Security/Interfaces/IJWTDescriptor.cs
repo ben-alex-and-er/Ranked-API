@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Configuration Data for JWT Decriptor
 	/// </summary>
-	public interface IJWTDescriptor
+	public interface IJwtDescriptor
 	{
 		/// <summary>
 		/// The JWT Issuer
