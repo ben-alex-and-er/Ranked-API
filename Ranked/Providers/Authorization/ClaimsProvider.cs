@@ -17,10 +17,34 @@ namespace Ranked.Providers.Authorization
 			{ Permissions.Roles.ADMIN, new List<Claim>(){ new(ClaimTypes.Role, Permissions.Roles.ADMIN) } }
 		};
 
+		private readonly List<Claim> readerClaims =
+		[
+			Permissions.User.read,
+			Permissions.Elo.read
+		];
 
-		IEnumerable<Claim> IClaimsProvider.GetClaims(string role)
+		private readonly List<Claim> adminClaims =
+		[
+			Permissions.User.read,
+			Permissions.User.write,
+			Permissions.User.delete,
+
+			Permissions.Elo.read,
+			Permissions.Elo.write,
+			Permissions.Elo.delete
+		];
+
+
+		IEnumerable<Claim> IClaimsProvider.GetSubjectClaims(string role)
 			=> roles.TryGetValue(role, out var claims)
 				? claims
 				: [];
+
+		IEnumerable<Claim> IClaimsProvider.GetRoleClaims(string role) => role switch
+		{
+			Permissions.Roles.READER => readerClaims,
+			Permissions.Roles.ADMIN => adminClaims,
+			_ => []
+		};
 	}
 }

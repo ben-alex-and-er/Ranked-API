@@ -16,7 +16,7 @@ namespace Unit_Tests.ProviderCreators.Authorization
 		{
 			var provider = Substitute.For<IClaimsProvider>();
 
-			provider.GetClaims(Arg.Any<string>())
+			provider.GetSubjectClaims(Arg.Any<string>())
 				.Returns(new List<Claim>()
 				{
 					AuthConsts.Claim
@@ -30,11 +30,8 @@ namespace Unit_Tests.ProviderCreators.Authorization
 		{
 			var provider = Substitute.For<IRoleProvider>();
 
-			provider.GetRoles()
-				.Returns(new Dictionary<string, string>()
-				{
-					{ AuthConsts.SUBJECT, PasswordHasher.HashPassword(AuthConsts.PASSWORD).ToString() }
-				});
+			provider.GetHashedPassword(AuthConsts.SUBJECT)
+				.Returns(PasswordHasher.HashPassword(AuthConsts.PASSWORD).ToString());
 
 			return provider;
 		}

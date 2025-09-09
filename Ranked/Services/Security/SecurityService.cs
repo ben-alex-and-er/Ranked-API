@@ -53,12 +53,12 @@ namespace Ranked.Services.Security
 
 		private async Task<bool> Validate(IPolicyRequest request)
 		{
-			var roles = await roleProvider.GetRoles();
+			var hashPassword = await roleProvider.GetHashedPassword(request.Subject);
 
-			if (!roles.TryGetValue(request.Subject, out var hash))
+			if (string.IsNullOrEmpty(hashPassword))
 				return false;
 
-			if (!PasswordHasher.VerifyPassword(request.Password, new HashedPassword(hash)))
+			if (!PasswordHasher.VerifyPassword(request.Password, new HashedPassword(hashPassword)))
 				return false;
 
 			return true;
@@ -66,7 +66,7 @@ namespace Ranked.Services.Security
 
 		private string CreateToken(string subject, DateTime expiry)
 		{
-			var claims = claimsProvider.GetClaims(subject);
+			var claims = claimsProvider.GetSubjectClaims(subject);
 
 			var now = DateTime.UtcNow;
 

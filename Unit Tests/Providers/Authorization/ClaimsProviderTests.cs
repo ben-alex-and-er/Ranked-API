@@ -17,10 +17,10 @@ namespace Unit_Tests.Providers.Authorization
 		}
 
 
-		[TestCaseSource(typeof(ClaimsProviderTestCaseSources), nameof(ClaimsProviderTestCaseSources.GetClaimsTestCaseSource))]
-		public void GetClaimsTests(string role, List<Claim> expectedClaims)
+		[TestCaseSource(typeof(ClaimsProviderTestCaseSources), nameof(ClaimsProviderTestCaseSources.GetSubjectClaimsTestCaseSource))]
+		public void GetSubjectClaimsTests(string role, List<Claim> expectedClaims)
 		{
-			var result = claimsProvider.GetClaims(role);
+			var result = claimsProvider.GetSubjectClaims(role);
 
 			Assert.That(result, Is.Not.Null);
 			Assert.That(

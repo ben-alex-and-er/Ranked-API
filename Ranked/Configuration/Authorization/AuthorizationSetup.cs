@@ -1,9 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Ranked.Configuration.Authorization
 {
 	using Data.Security;
+	using DataAccessors.Authorization;
+	using DataAccessors.Authorization.Interfaces;
+	using Providers.Authorization;
+	using Providers.Authorization.Interfaces;
 	using Providers.Authorization.Policy;
 
 
@@ -17,6 +22,13 @@ namespace Ranked.Configuration.Authorization
 		public static IServiceCollection AddAuthorizationServices(this IServiceCollection services)
 		{
 			services.AddAuthorization(SetupPolicies);
+
+			services.AddScoped<IClaimsTransformation, ClaimsTransformation>();
+
+			services.AddTransient<IClaimsProvider, ClaimsProvider>();
+			services.AddTransient<IRoleProvider, RoleProvider>();
+
+			services.AddTransient<IRolePasswordDA, RolePasswordDA>();
 
 			return services;
 		}

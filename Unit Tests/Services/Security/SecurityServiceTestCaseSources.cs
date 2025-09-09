@@ -12,8 +12,8 @@ namespace Unit_Tests.Services.Security
 		{
 			get
 			{
-				yield return new TestCaseData(string.Empty, AuthConsts.PASSWORD, typeof(UnauthorizedObjectResult), 401);
-				yield return new TestCaseData(AuthConsts.SUBJECT, string.Empty, typeof(UnauthorizedObjectResult), 401);
+				yield return new TestCaseData("Fake Subject", AuthConsts.PASSWORD, typeof(UnauthorizedObjectResult), 401);
+				yield return new TestCaseData(AuthConsts.SUBJECT, "Fake Password", typeof(UnauthorizedObjectResult), 401);
 				yield return new TestCaseData(AuthConsts.SUBJECT, AuthConsts.PASSWORD, typeof(OkObjectResult), 200);
 			}
 		}

@@ -1,21 +1,34 @@
-﻿namespace Ranked.Providers.Authorization
+﻿using Microsoft.EntityFrameworkCore;
+
+
+namespace Ranked.Providers.Authorization
 {
-	using Claims;
+	using DataAccessors.Authorization.Interfaces;
 	using Interfaces;
 
 
 	/// <inheritdoc/>
-	[Obsolete("This should be using the Database")]
 	public class RoleProvider : IRoleProvider
 	{
-		private static readonly Dictionary<string, string> subjectMap = new()
+		private readonly IRolePasswordDA rolePasswordDA;
+
+
+		/// <summary>
+		/// Constructor for <see cref="IRolePasswordDA"/>
+		/// </summary>
+		/// <param name="rolePasswordDA"></param>
+		public RoleProvider(IRolePasswordDA rolePasswordDA)
 		{
-			{ Permissions.Roles.READER, "WjFWWmF6ZGFkV0l2VkU1Tk4wOUlLMkpQV2xaVGR6MDkuMTAwMDAwLlNIQTUxMi4zMi5lWFp0Tm1KMU5FZDBSa2RCTldOeWRtMW1ZbmN2TVhCa2NsbHFWMDFEZDNsT1FtZzVhVUZuUVZoU1RUMD0=" },
-			{ Permissions.Roles.ADMIN, "WjFWWmF6ZGFkV0l2VkU1Tk4wOUlLMkpQV2xaVGR6MDkuMTAwMDAwLlNIQTUxMi4zMi5lWFp0Tm1KMU5FZDBSa2RCTldOeWRtMW1ZbmN2TVhCa2NsbHFWMDFEZDNsT1FtZzVhVUZuUVZoU1RUMD0=" }
-		};
+			this.rolePasswordDA = rolePasswordDA;
+		}
 
 
-		Task<Dictionary<string, string>> IRoleProvider.GetRoles()
-			=> Task.FromResult(subjectMap);
+		async Task<string?> IRoleProvider.GetHashedPassword(string role)
+		{
+			var rolePassword = await rolePasswordDA.Read()
+				.FirstOrDefaultAsync(rolePassword => rolePassword.Subject == role);
+
+			return rolePassword?.Password;
+		}
 	}
 }

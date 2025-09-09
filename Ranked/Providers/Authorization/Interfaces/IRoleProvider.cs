@@ -6,9 +6,10 @@
 	public interface IRoleProvider
 	{
 		/// <summary>
-		/// Retrieves a dictionary of roles and associated hashedPasswords
+		/// Retrieves a hashed password for the provided role
 		/// </summary>
-		/// <returns>A dictionary of roles and associated hashedPasswords</returns>
-		public Task<Dictionary<string, string>> GetRoles();
+		/// <param name="role">Role to find hashed password for</param>
+		/// <returns>The hashed password for the provided role of roles</returns>
+		public Task<string?> GetHashedPassword(string role);
 	}
 }

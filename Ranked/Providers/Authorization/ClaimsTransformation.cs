@@ -4,29 +4,23 @@ using System.Security.Claims;
 
 namespace Ranked.Providers.Authorization
 {
-	using Claims;
+	using Interfaces;
 
 
 	/// <inheritdoc/>
-	[Obsolete("This should be using the Database")]
 	public class ClaimsTransformation : IClaimsTransformation
 	{
-		private readonly List<Claim> readerClaims =
-		[
-			Permissions.User.read,
-			Permissions.Elo.read
-		];
+		private readonly IClaimsProvider claimsProvider;
 
-		private readonly List<Claim> adminClaims =
-		[
-			Permissions.User.read,
-			Permissions.User.write,
-			Permissions.User.delete,
 
-			Permissions.Elo.read,
-			Permissions.Elo.write,
-			Permissions.Elo.delete
-		];
+		/// <summary>
+		/// Constructor for <see cref="ClaimsTransformation"/>
+		/// </summary>
+		/// <param name="claimsProvider">Provider for claims</param>
+		public ClaimsTransformation(IClaimsProvider claimsProvider)
+		{
+			this.claimsProvider = claimsProvider;
+		}
 
 
 		async Task<ClaimsPrincipal> IClaimsTransformation.TransformAsync(ClaimsPrincipal principal)
@@ -36,19 +30,11 @@ namespace Ranked.Providers.Authorization
 			if (role == null)
 				return new ClaimsPrincipal();
 
-			var claims = GetRoleClaims(role);
+			var claims = claimsProvider.GetRoleClaims(role);
 
 			var identity = new ClaimsIdentity(principal.Identity, claims);
 
 			return new ClaimsPrincipal(identity);
 		}
-
-
-		private List<Claim> GetRoleClaims(string role) => role switch
-		{
-			Permissions.Roles.READER => readerClaims,
-			Permissions.Roles.ADMIN => adminClaims,
-			_ => []
-		};
 	}
 }

@@ -6,7 +6,7 @@ namespace Unit_Tests.Providers.Authorization
 {
 	internal static class ClaimsProviderTestCaseSources
 	{
-		public static IEnumerable<TestCaseData> GetClaimsTestCaseSource
+		public static IEnumerable<TestCaseData> GetSubjectClaimsTestCaseSource
 		{
 			get
 			{
