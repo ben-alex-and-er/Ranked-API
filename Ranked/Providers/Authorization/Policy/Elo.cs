@@ -1,4 +1,4 @@
-﻿namespace Ranked.Providers.Authorization.Policy
+namespace Ranked.Providers.Authorization.Policy
 {
 	using Claims;
 	using Data.Security;
@@ -25,12 +25,12 @@
 			/// <summary>
 			/// PolicyClaim for Elo.Read permissions
 			/// </summary>
-			public static readonly PolicyClaim read = new(READ_ELO, Permissions.User.read);
+			public static readonly PolicyClaim read = new(READ_ELO, Permissions.Elo.read);
 
 			/// <summary>
 			/// PolicyClaim for Elo.Write permissions
 			/// </summary>
-			public static readonly PolicyClaim write = new(WRITE_ELO, Permissions.User.write);
+			public static readonly PolicyClaim write = new(WRITE_ELO, Permissions.Elo.write);
 		}
 	}
 }

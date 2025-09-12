@@ -1,4 +1,4 @@
-﻿namespace Ranked.Data.Elo.DTOs
+namespace Ranked.Data.Elo.DTOs
 {
 	/// <summary>
 	/// Data Transfer Object containing a user identifier and their associated elo
@@ -6,12 +6,12 @@
 	public class UserEloDTO
 	{
 		/// <summary>
-		/// User Identifier
+		/// User identifier
 		/// </summary>
 		public required string User {  get; set; }
 
 		/// <summary>
-		/// User Elo
+		/// Elo rating
 		/// </summary>
 		public required uint Elo { get; set; }
 

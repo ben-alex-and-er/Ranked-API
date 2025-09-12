@@ -9,5 +9,5 @@ public partial class User
 
     public string Identifier { get; set; } = null!;
 
-    public virtual UserElo? UserElo { get; set; }
+    public virtual ICollection<UserApplication> UserApplications { get; set; } = new List<UserApplication>();
 }

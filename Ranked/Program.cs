@@ -1,5 +1,6 @@
 namespace Ranked
 {
+	using Configuration.Application;
 	using Configuration.Authentication;
 	using Configuration.Authorization;
 	using Configuration.Database;
@@ -22,8 +23,9 @@ namespace Ranked
 			builder.Services.AddSwaggerGen();
 
 			builder.Services
-				.AddAuthorizationServices()
+				.AddApplicationServices()
 				.AddAuthenticationServices()
+				.AddAuthorizationServices()
 				.AddDatabaseContext()
 				.AddEloServices()
 				.AddSecurityServices()

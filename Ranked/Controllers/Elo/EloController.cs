@@ -1,4 +1,4 @@
-﻿using IOData.Output;
+using IOData.Output;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,18 +23,18 @@ namespace Ranked.Controllers.Elo
 	{
 		private readonly IEloService eloService;
 
-		private readonly IUserEloDA userEloDA;
+		private readonly IUserApplicationEloDA userApplicationEloDA;
 
 
 		/// <summary>
 		/// Constructor for <see cref="EloController"/>
 		/// </summary>
 		/// <param name="eloService">Service responsible for elo business logic</param>
-		/// <param name="userEloDA">Data accessor for the user_elo database table</param>
-		public EloController(IEloService eloService, IUserEloDA userEloDA)
+		/// <param name="userApplicationEloDA">Data accessor for the user_application_elo database table</param>
+		public EloController(IEloService eloService, IUserApplicationEloDA userApplicationEloDA)
 		{
 			this.eloService = eloService;
-			this.userEloDA = userEloDA;
+			this.userApplicationEloDA = userApplicationEloDA;
 		}
 
 
@@ -49,12 +49,27 @@ namespace Ranked.Controllers.Elo
 			=> eloService._1v1(request);
 
 		/// <summary>
-		/// Retrieves a collection of users with their associated elos
+		/// Retrieves a collection of user applications with their associated elos
 		/// </summary>
-		/// <returns>An <see cref="IQueryable{T}"/> of <see cref="UserEloDTO"/> representing user elo data</returns>
-		[HttpGet]
+		/// <returns>An <see cref="IQueryable{T}"/> of <see cref="UserApplicationEloDTO"/> representing user application elo data</returns>
+		[HttpGet("userapplicationelos")]
 		[Authorize(Policy = Policies.Elo.READ_ELO)]
-		public IQueryable<UserEloDTO> GetUserElos()
-			=> userEloDA.Read();
+		public IQueryable<UserApplicationEloDTO> GetUserApplicationElos()
+			=> userApplicationEloDA.Read();
+
+		/// <summary>
+		/// Retrieves a collection of users with their associated elos from a given application
+		/// </summary>
+		/// <returns>An <see cref="IQueryable{T}"/> of <see cref="UserApplicationEloDTO"/> representing user application elo data</returns>
+		[HttpGet("userelos")]
+		[Authorize(Policy = Policies.Elo.READ_ELO)]
+		public IQueryable<UserEloDTO> GetUserElos(GetUserElosRequest request)
+			=> userApplicationEloDA.Read()
+				.Where(userAppElo => userAppElo.UserApplication.Application == request.Application)
+				.Select(userAppElo => new UserEloDTO
+				{
+					User = userAppElo.UserApplication.User,
+					Elo = userAppElo.Elo
+				});
 	}
 }

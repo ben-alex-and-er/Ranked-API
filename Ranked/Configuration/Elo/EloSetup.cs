@@ -17,7 +17,7 @@
 		{
 			services.AddTransient<IEloService, EloService>();
 
-			services.AddTransient<IUserEloDA, UserEloDA>();
+			services.AddTransient<IUserApplicationEloDA, UserApplicationEloDA>();
 
 			return services;
 		}

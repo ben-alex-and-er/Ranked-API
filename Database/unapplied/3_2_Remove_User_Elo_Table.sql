@@ -1,0 +1,1 @@
+DROP TABLE ranked.user_elo;

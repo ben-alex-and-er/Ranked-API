@@ -14,7 +14,8 @@ namespace Ranked.Providers.Authorization
 		private readonly List<Claim> readerClaims =
 		[
 			Permissions.User.read,
-			Permissions.Elo.read
+			Permissions.Elo.read,
+			Permissions.Application.read,
 		];
 
 		private readonly List<Claim> adminClaims =
@@ -25,7 +26,11 @@ namespace Ranked.Providers.Authorization
 
 			Permissions.Elo.read,
 			Permissions.Elo.write,
-			Permissions.Elo.delete
+			Permissions.Elo.delete,
+
+			Permissions.Application.read,
+			Permissions.Application.write,
+			Permissions.Application.delete,
 		];
 
 

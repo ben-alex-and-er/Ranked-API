@@ -9,5 +9,10 @@
 		/// New User Identifier
 		/// </summary>
 		public string User { get; }
+
+		/// <summary>
+		/// Application for the user
+		/// </summary>
+		public Guid Application { get; }
 	}
 }
