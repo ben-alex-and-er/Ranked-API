@@ -17,10 +17,10 @@ namespace Ranked.Configuration.Authentication
 		/// <returns></returns>
 		public static IServiceCollection AddAuthenticationServices(this IServiceCollection services)
 		{
-			services.AddSingleton<IJWTDescriptor, JWTDescriptor>();
+			services.AddSingleton<IJwtDescriptor, JwtDescriptor>();
 
 			var provider = services.BuildServiceProvider();
-			var jwtDescriptor = provider.GetRequiredService<IJWTDescriptor>();
+			var jwtDescriptor = provider.GetRequiredService<IJwtDescriptor>();
 
 			services.AddAuthentication("Bearer")
 				.AddJwtBearer("Bearer", options =>

@@ -1,4 +1,4 @@
-﻿using IOData.Output;
+using IOData.Output;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

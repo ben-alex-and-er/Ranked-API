@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TransactionToolkit.Interfaces;
 
 
@@ -83,8 +83,7 @@ namespace Ranked.Services.User
 			if (!createElo)
 				return new CreateUserResponse(CreateUserStatus.FAILED_TO_CREATE_ELO);
 
-
-			transaction.Commit();
+			await transaction.CommitAsync();
 
 			return new CreateUserResponse(CreateUserStatus.SUCCESS);
 		}

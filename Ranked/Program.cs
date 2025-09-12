@@ -1,52 +1,55 @@
-using Ranked.Configuration.Application;
-using Ranked.Configuration.Authentication;
-using Ranked.Configuration.Authorization;
-using Ranked.Configuration.Database;
-using Ranked.Configuration.Elo;
-using Ranked.Configuration.Security;
-using Ranked.Configuration.Transaction;
-using Ranked.Configuration.User;
-
-
-internal class Program
+namespace Ranked
 {
-	private static void Main(string[] args)
+	using Configuration.Application;
+	using Configuration.Authentication;
+	using Configuration.Authorization;
+	using Configuration.Database;
+	using Configuration.Elo;
+	using Configuration.Security;
+	using Configuration.Transaction;
+	using Configuration.User;
+
+
+	internal static class Program
 	{
-		var builder = WebApplication.CreateBuilder(args);
-
-
-		builder.Services.AddControllers();
-
-		builder.Services.AddEndpointsApiExplorer();
-		builder.Services.AddSwaggerGen();
-
-		builder.Services
-			.AddApplicationServices()
-			.AddAuthenticationServices()
-			.AddAuthorizationServices()
-			.AddDatabaseContext()
-			.AddEloServices()
-			.AddSecurityServices()
-			.AddTransactionServices()
-			.AddUserServices();
-
-
-		var app = builder.Build();
-
-		// Configure the HTTP request pipeline.
-		if (app.Environment.IsDevelopment())
+		private static void Main(string[] args)
 		{
-			app.UseSwagger();
-			app.UseSwaggerUI();
+			var builder = WebApplication.CreateBuilder(args);
+
+
+			builder.Services.AddControllers();
+
+			builder.Services.AddEndpointsApiExplorer();
+			builder.Services.AddSwaggerGen();
+
+			builder.Services
+				.AddApplicationServices()
+				.AddAuthenticationServices()
+				.AddAuthorizationServices()
+				.AddDatabaseContext()
+				.AddEloServices()
+				.AddSecurityServices()
+				.AddTransactionServices()
+				.AddUserServices();
+
+
+			var app = builder.Build();
+
+			// Configure the HTTP request pipeline.
+			if (app.Environment.IsDevelopment())
+			{
+				app.UseSwagger();
+				app.UseSwaggerUI();
+			}
+
+			app.UseHttpsRedirection();
+
+			app.UseAuthentication();
+			app.UseAuthorization();
+
+			app.MapControllers();
+
+			app.Run();
 		}
-
-		app.UseHttpsRedirection();
-
-		app.UseAuthentication();
-		app.UseAuthorization();
-
-		app.MapControllers();
-
-		app.Run();
 	}
 }

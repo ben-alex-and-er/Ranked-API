@@ -1,4 +1,4 @@
-﻿namespace Ranked.Providers.Authorization.Policy
+namespace Ranked.Providers.Authorization.Policy
 {
 	using Claims;
 	using Data.Security;
@@ -9,7 +9,7 @@
 		/// <summary>
 		/// Elo related Policies
 		/// </summary>
-		public class Elo
+		public static class Elo
 		{
 			/// <summary>
 			/// Policy for read
