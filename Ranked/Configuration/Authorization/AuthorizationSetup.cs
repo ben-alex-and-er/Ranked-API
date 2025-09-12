@@ -39,6 +39,8 @@ namespace Ranked.Configuration.Authorization
 			options.AddPolicies([Policies.User.read, Policies.User.write, Policies.User.delete]);
 
 			options.AddPolicies([Policies.Elo.read, Policies.Elo.write]);
+
+			options.AddPolicies([Policies.Application.read, Policies.Application.write]);
 		}
 
 		private static void AddPolicies(this AuthorizationOptions options, IEnumerable<PolicyClaim> policyClaims)

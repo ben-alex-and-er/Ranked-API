@@ -18,11 +18,11 @@ namespace Unit_Tests.Providers.Elo
 
 		[TestCaseSource(typeof(EloCalculatorTestCaseSources), nameof(EloCalculatorTestCaseSources.CalculateElosTestCaseSource))]
 		public void CalculateEloTests(
-			IEnumerable<UserEloDTO> winners,
-			IEnumerable<UserEloDTO> losers,
+			List<UserApplicationEloDTO> winners,
+			List<UserApplicationEloDTO> losers,
 			int maxEloChange,
-			IEnumerable<UserEloDTO> expectedWinners,
-			IEnumerable<UserEloDTO> expectedLosers)
+			List<UserApplicationEloDTO> expectedWinners,
+			List<UserApplicationEloDTO> expectedLosers)
 		{
 			// Act
 			var result = EloCalculator.CalculateElos(winners, losers, (uint)maxEloChange);
@@ -37,11 +37,11 @@ namespace Unit_Tests.Providers.Elo
 
 		[TestCaseSource(typeof(EloCalculatorTestCaseSources), nameof(EloCalculatorTestCaseSources.CalculateWeightedElosTestCaseSource))]
 		public void CalculateElosWithWeightedTeamsTests(
-			IEnumerable<UserEloDTO> winners,
-			IEnumerable<UserEloDTO> losers,
+			List<UserApplicationEloDTO> winners,
+			List<UserApplicationEloDTO> losers,
 			int maxEloChange,
-			IEnumerable<UserEloDTO> expectedWinners,
-			IEnumerable<UserEloDTO> expectedLosers)
+			List<UserApplicationEloDTO> expectedWinners,
+			List<UserApplicationEloDTO> expectedLosers)
 		{
 			// Act
 			var result = EloCalculator.CalculateWeightedElos(winners, losers, (uint)maxEloChange);

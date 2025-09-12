@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ranked.Data.Elo.DTOs;
+using Ranked.Data.User.DTOs;
 using Ranked.DataAccessors.Elo;
 using Ranked.DataAccessors.Elo.Interfaces;
 using Ranked.Models;
@@ -13,7 +14,7 @@ namespace Unit_Tests.DataAccessors.Elo
 
 	internal class UserEloDATests
 	{
-		private IUserEloDA userEloDA;
+		private IUserApplicationEloDA userEloDA;
 
 		private RankedContext context;
 
@@ -47,27 +48,62 @@ namespace Unit_Tests.DataAccessors.Elo
 				Identifier = UserConsts.VALID_USER_4
 			});
 
-			context.UserElos.Add(new UserElo
+			context.Applications.Add(new Ranked.Models.Application
 			{
+				Id = 1,
+				Name = AppConsts.APP_NAME,
+				Guid = new Guid(AppConsts.APP_GUID)
+			});
+
+			context.UserApplications.Add(new UserApplication
+			{
+				Id = 1,
 				UserId = 1,
+				ApplicationId = 1
+			});
+
+			context.UserApplications.Add(new UserApplication
+			{
+				Id = 2,
+				UserId = 2,
+				ApplicationId = 1
+			});
+
+			context.UserApplications.Add(new UserApplication
+			{
+				Id = 3,
+				UserId = 3,
+				ApplicationId = 1
+			});
+
+			context.UserApplications.Add(new UserApplication
+			{
+				Id = 4,
+				UserId = 4,
+				ApplicationId = 1
+			});
+
+			context.UserApplicationElos.Add(new UserApplicationElo
+			{
+				UserApplicationId = 1,
 				Elo = 1000
 			});
 
-			context.UserElos.Add(new UserElo
+			context.UserApplicationElos.Add(new UserApplicationElo
 			{
-				UserId = 2,
+				UserApplicationId = 2,
 				Elo = 2000
 			});
 
-			context.UserElos.Add(new UserElo
+			context.UserApplicationElos.Add(new UserApplicationElo
 			{
-				UserId = 3,
+				UserApplicationId = 3,
 				Elo = 3000
 			});
 
 			await context.SaveChangesAsync();
 
-			userEloDA = new UserEloDA(context);
+			userEloDA = new UserApplicationEloDA(context);
 		}
 
 
@@ -80,12 +116,16 @@ namespace Unit_Tests.DataAccessors.Elo
 
 
 		[TestCaseSource(typeof(UserEloDATestCaseSources), nameof(UserEloDATestCaseSources.CreateTestCaseSource))]
-		public async Task CreateTests(string user, int elo, bool success)
+		public async Task CreateTests(string user, string application, int elo, bool success)
 		{
 			// Arrange
-			var userElo = new UserEloDTO
+			var userElo = new UserApplicationEloDTO
 			{
-				User = user,
+				UserApplication = new UserApplicationDTO
+				{
+					User = user,
+					Application = new Guid(application)
+				},
 				Elo = (uint)elo,
 			};
 
@@ -99,8 +139,9 @@ namespace Unit_Tests.DataAccessors.Elo
 
 				if (success)
 				{
-					var created = await context.UserElos
-						.Where(x => x.User.Identifier == user)
+					var created = await context.UserApplicationElos
+						.Where(x => x.UserApplication.User.Identifier == user)
+						.Where(x => x.UserApplication.Application.Guid == new Guid(application))
 						.Where(x => x.Elo == elo)
 						.AnyAsync();
 
@@ -113,21 +154,33 @@ namespace Unit_Tests.DataAccessors.Elo
 		public void ReadTest()
 		{
 			// Arrange
-			var expectedResult = new List<UserEloDTO>()
+			var expectedResult = new List<UserApplicationEloDTO>()
 			{
 				new()
 				{
-					User = UserConsts.VALID_USER_1,
+					UserApplication = new UserApplicationDTO
+					{
+						User = UserConsts.VALID_USER_1,
+						Application = new Guid(AppConsts.APP_GUID)
+					},
 					Elo = 1000
 				},
 				new()
 				{
-					User = UserConsts.VALID_USER_2,
+					UserApplication = new UserApplicationDTO
+					{
+						User = UserConsts.VALID_USER_2,
+						Application = new Guid(AppConsts.APP_GUID)
+					},
 					Elo = 2000
 				},
 				new()
 				{
-					User = UserConsts.VALID_USER_3,
+					UserApplication = new UserApplicationDTO
+					{
+						User = UserConsts.VALID_USER_3,
+						Application = new Guid(AppConsts.APP_GUID)
+					},
 					Elo = 3000
 				}
 			};
@@ -140,10 +193,17 @@ namespace Unit_Tests.DataAccessors.Elo
 		}
 
 		[TestCaseSource(typeof(UserEloDATestCaseSources), nameof(UserEloDATestCaseSources.UpdateTestCaseSource))]
-		public async Task UpdateTests(string user, int elo, bool success)
+		public async Task UpdateTests(string user, string application, int elo, bool success)
 		{
+			// Arrange
+			var userApp = new UserApplicationDTO
+			{
+				User = user,
+				Application = new Guid(application)
+			};
+
 			// Act
-			var result = await userEloDA.Update(user, (uint)elo);
+			var result = await userEloDA.Update(userApp, (uint)elo);
 
 			// Assert
 			Assert.Multiple(async () =>
@@ -152,8 +212,9 @@ namespace Unit_Tests.DataAccessors.Elo
 
 				if (success)
 				{
-					var updated = await context.UserElos
-						.Where(x => x.User.Identifier == user)
+					var updated = await context.UserApplicationElos
+						.Where(x => x.UserApplication.User.Identifier == user)
+						.Where(x => x.UserApplication.Application.Guid == new Guid(application))
 						.Where(x => x.Elo == elo)
 						.AnyAsync();
 

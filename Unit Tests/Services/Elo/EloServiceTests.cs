@@ -1,6 +1,7 @@
 ﻿using Ranked.Data.Elo.Requests;
 using Ranked.Data.Elo.Responses;
 using Ranked.Data.Elo.Status;
+using Ranked.Data.User.DTOs;
 using Ranked.Services.Elo;
 using Ranked.Services.Elo.Interfaces;
 
@@ -18,12 +19,12 @@ namespace Unit_Tests.Services.Elo
 		[SetUp]
 		public void SetUp()
 		{
-			eloService = new EloService(EloDACreator.CreateUserEloDA());
+			eloService = new EloService(EloDACreator.CreateUserApplicationEloDA());
 		}
 
 
 		[TestCaseSource(typeof(EloServiceTestCaseSources), nameof(EloServiceTestCaseSources._1V1TestCaseSource))]
-		public async Task _1v1Tests(string winner, string loser, _1v1Status expectedStatus, _1v1Response expectedResponse)
+		public async Task _1v1Tests(UserApplicationDTO winner, UserApplicationDTO loser, _1v1Status expectedStatus, _1v1Response expectedResponse)
 		{
 			// Arrange
 			var request = new _1v1Request(winner, loser);
